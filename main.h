@@ -1,6 +1,19 @@
 #ifndef main_h
 #define main_h
 
+
+/**
+ * struct printFormat - structure for conversion specifiers
+ * @format: flags preceded by %
+ * @p: use function of format specified
+ */
+typedef struct printFormat
+{
+	char *format;
+	int (*p)();
+} print_format;
+
+
 #include <stdarg.h>
 int _putchar(char *a);
 
