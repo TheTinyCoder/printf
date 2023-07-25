@@ -81,7 +81,7 @@ int print_int(va_list arg)
 		{
 			dig = num / exp;
 			_putchar(dig + 48);
-			num -=(dig * exp);
+			num -= (dig * exp);
 			exp /= 10;
 			i++;
 		}
