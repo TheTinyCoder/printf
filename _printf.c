@@ -15,8 +15,7 @@ int _printf(const char *format, ...)
 	unsigned int flag, i, j, len = 0;
 
 	print_format print[] = {
-		{"c", print_char}, {"s", print_str},
-		{NULL, NULL}
+		{"c", print_char}, {"s", print_str}, {"d", print_dec}, {"i", print_int}, {NULL, NULL}
 	};
 
 	va_start(arg, format);
@@ -54,12 +53,12 @@ int _printf(const char *format, ...)
 		{
 			_putchar('%');
 			i++;
-			len = len + 1;
+			len += 1;
 		}
 		else
 		{
 			_putchar(format[i]);
-			len = len + 1;
+			len += 1;
 		}
 		i++;
 	}
