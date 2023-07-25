@@ -24,4 +24,8 @@ int print_char(va_list arg);
 /* prints a string */
 int print_str(va_list arg);
 
+/* prints an integer */
+int print_int(va_list arg);
+/* prints base 10 */
+int print_dec(va_list arg);
 #endif
