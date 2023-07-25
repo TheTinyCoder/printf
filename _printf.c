@@ -39,7 +39,7 @@ int _printf(const char *format, ...)
 				if (format[i + 1] == print[j].format[0])
 				{
 					len += print[j].p(arg);
-					flag = 1;
+					flag += 1;
 					i++;
 				}
 				j++;
@@ -47,7 +47,7 @@ int _printf(const char *format, ...)
 			if (flag == 0)
 			{
 				_putchar(format[i]);
-				len = len + 1;
+				len += 1;
 			}
 		}
 		else if (format[i] == '%' && format[i + 1] == '%')
