@@ -15,7 +15,7 @@ typedef struct printFormat
 
 
 #include <stdarg.h>
-int _putchar(char *a);
+int _putchar(char c);
 
 int _printf(const char *format, ...);
 
