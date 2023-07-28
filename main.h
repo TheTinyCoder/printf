@@ -26,6 +26,9 @@ int print_percent(va_list __attribute__((unused)), char *, unsigned int);
 /* prints a string */
 int print_str(va_list args, char *buf, unsigned int buf_index);
 
+/* prints a string with custom specifier S */
+int print_string_S(va_list args, char *buf, unsigned int buf_index);
+
 /* prints an integer */
 int print_int(va_list args, char *buf, unsigned int buf_index);
 /* prints an integer in base 10 */
