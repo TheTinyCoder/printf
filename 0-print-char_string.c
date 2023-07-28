@@ -1,11 +1,12 @@
+#include "main.h"
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include "main.h"
-
 
 /**
- * print_char - writes the character c to stdout (prints a character)
+ * print_char - function entry-point
+ *
+ * Description: writes the character c to stdout (prints a character)
  * @args: arguments
  * @buf: pointer to buffer
  * @buf_index: index for buffer pointer
@@ -24,7 +25,8 @@ int print_char(va_list args, char *buf, unsigned int buf_index)
 
 
 /**
- * print_percent - writes the character c to stdout
+ * print_percent - function entry-point
+ * Description: writes the character c to stdout
  * @a: input charater
  * @buf: pointer to buffer
  * @i: index for buffer pointer
@@ -40,7 +42,8 @@ int print_percent(va_list a __attribute__((unused)), char *buf, unsigned int i)
 
 
 /**
- * print_str - writes the string to stdout(prints a string)
+ * print_str - function entry-point
+ * Description: writes the string to stdout(prints a string)
  * @args: arguments
  * @buf: pointer to buffer
  * @buf_index: index for buffer pointer
