@@ -11,6 +11,7 @@
  * @buf_index: index for buffer pointer
  * Return: 1 (on success)
  */
+
 int print_char(va_list args, char *buf, unsigned int buf_index)
 {
 	char c;
@@ -21,13 +22,31 @@ int print_char(va_list args, char *buf, unsigned int buf_index)
 	return (1);
 }
 
+
+/**
+ * print_percent - writes the character c to stdout
+ * @a: input charater
+ * @buf: pointer to buffer
+ * @i: index for buffer pointer
+ * Return: On success 1.
+ */
+
+int print_percent(va_list a __attribute__((unused)), char *buf, unsigned int i)
+{
+	handle_buf(buf, '%', i);
+
+	return (1);
+}
+
+
 /**
  * print_str - writes the string to stdout(prints a string)
  * @args: arguments
- * @buf: buffer pointer
+ * @buf: pointer to buffer
  * @buf_index: index for buffer pointer
  * Return: 1 (on success)
  */
+
 int print_str(va_list args, char *buf, unsigned int buf_index)
 {
 	char *str, nil[] = "(null)";

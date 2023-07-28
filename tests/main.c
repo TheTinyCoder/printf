@@ -34,6 +34,7 @@ int main(void)
     _printf("iddi%diddiiddi\n", 1024);
     _printf(NULL);
     _printf("%");
+    _printf("Should print a single percent sign: %%\n");
     _printf("A char inside a sentence: %c. Did it work?\n", 'F');
     _printf("String:[%s]\n", "I am a string !");
     printf("String:[%s]\n", "I am a string !");

@@ -21,6 +21,8 @@ int _printf(const char *format, ...);
 
 /* prints a character */
 int print_char(va_list args, char *buf, unsigned int buf_index);
+/* prints a percentage */
+int print_percent(va_list __attribute__((unused)), char *, unsigned int);
 /* prints a string */
 int print_str(va_list args, char *buf, unsigned int buf_index);
 
