@@ -10,6 +10,7 @@
  * @limit: size of the binary
  * Return: number of chars printed.
  */
+
 char *fill_binary_array(char *binary, long int in, int neg, int limit)
 {
 	int i;
@@ -46,6 +47,7 @@ char *fill_binary_array(char *binary, long int in, int neg, int limit)
  * @buf_index: index for buffer pointer
  * Return: number of chars printed.
  */
+
 int print_binary(va_list args, char *buf, unsigned int buf_index)
 {
 	int input, count, i, first_one, neg;
