@@ -40,6 +40,10 @@ int print_dec(va_list args);
 /* prints unsigned integer */
 int print_uint(va_list args, char *buf, unsigned int buf_index);
 
+/* prints an integer as binary */
+int print_binary(va_list args, char *buf, unsigned int buf_index);
+
+
 /* prints an integer as hex */
 int print_hex(va_list args, char *buf, unsigned int buf_index);
 int print_upperhex(va_list args, char *buf, unsigned int buf_index);
@@ -70,6 +74,12 @@ int print_luint(va_list args, char *buf, unsigned int buf_index);
 int print_loct(va_list args, char *buf, unsigned int buf_index);
 int print_lhex(va_list args, char *buf, unsigned int buf_index);
 int print_lupperhex(va_list args, char *buf, unsigned int buf_index);
+
+/* prints string in reverse */
+int print_rev(va_list args, char *buf, unsigned int buf_index);
+
+/* handles custom rot13 conversion */
+int print_rot(va_list args, char *buf, unsigned int buf_index);
 
 /* util functions */
 int (*get_format_func(const char *s, int index))(va_list, char *, unsigned int);

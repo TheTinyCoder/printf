@@ -44,17 +44,25 @@ int print_buf(char *buf, unsigned int nbytes)
 int all_format_functions(const char *s, int index)
 {
 	print_format print[] = {
-		{"c", print_char}, {"s", print_str}, {"i", print_int}, {"d", print_int},
-		{" %", print_percent}, {"u", print_uint}, {"o", print_oct}, {"x", print_hex},
-		{"X", print_upperhex}, {"S", print_string_S}, {"p", print_address}, {"#o", print_noct},
-		{"#x", print_nhex}, {"#X", print_nupperhex}, {"#i", print_int}, {"#d", print_int},
-		{"#u", print_uint}, {"+i", print_plusint}, {"+d", print_plusint}, {"+u", print_uint},
-		{"+o", print_oct}, {"+x", print_hex}, {"+X", print_upperhex}, {" i", print_spaceint},
-		{" d", print_spaceint}, {" u", print_uint}, {" o", print_oct}, {" x", print_hex},
-		{" X", print_upperhex}, {"li", print_lint}, {"ld", print_lint}, {"lu", print_luint},
-		{"lo", print_loct}, {"lx", print_lhex}, {"lX", print_lupperhex}, {"hi", print_shortint},
-		{"hd", print_shortint}, {"hu", print_shortuint}, {"ho", print_shortoct}, {"hx", print_shorthex},
-		{"hX", print_shortupperhex}, {NULL, NULL}
+		{"c", print_char}, {"s", print_str}, {"i", print_int},
+		{"d", print_int}, {"b", print_binary}, {"u", print_uint},
+		{"o", print_oct}, {"x", print_hex}, {"X", print_upperhex},
+		{"S", print_string_S}, {"p", print_address}, {"#o", print_noct},
+		{"#x", print_nhex}, {"#X", print_nupperhex}, {"#i", print_int},
+		{"#d", print_int}, {"#u", print_uint}, {"+i", print_plusint},
+		{"+d", print_plusint}, {"+u", print_uint}, {"+o", print_oct},
+		{"+x", print_hex}, {"+X", print_upperhex}, {" i", print_spaceint},
+		{" d", print_spaceint}, {" u", print_uint}, {" o", print_oct},
+		{" x", print_hex}, {" X", print_upperhex}, {"li", print_lint},
+		{"ld", print_lint}, {"lu", print_luint}, {"lo", print_loct},
+		{"lx", print_lhex}, {"lX", print_lupperhex}, {"hi", print_shortint},
+		{"hd", print_shortint}, {"hu", print_shortuint}, {"ho", print_shortoct},
+		{"hx", print_shorthex}, {"hX", print_shortupperhex}, {"R", print_rot},
+		{"r", print_rev}, {"%", print_percent}, {" %", print_percent},
+		{"l", print_percent}, {"h", print_percent}, {" +i", print_plusint},
+		{" +d", print_plusint}, {"+ i", print_plusint}, {"+ d", print_plusint},
+		{NULL, NULL}
+
 	};
 	int i = 0, j = 0, first_index;
 
@@ -69,11 +77,7 @@ int all_format_functions(const char *s, int index)
 				break;
 		}
 		else
-		{
-			j = 0;
-			i++;
-			index = first_index;
-		}
+			j = 0, i++, index = first_index;
 	}
 	return (j);
 }
@@ -88,17 +92,25 @@ int all_format_functions(const char *s, int index)
 int (*get_format_func(const char *s, int index))(va_list, char *, unsigned int)
 {
 	print_format print[] = {
-		{"c", print_char}, {"s", print_str}, {"i", print_int}, {"d", print_int},
-		{" %", print_percent}, {"u", print_uint}, {"o", print_oct}, {"x", print_hex},
-		{"X", print_upperhex}, {"S", print_string_S}, {"p", print_address}, {"#o", print_noct},
-		{"#x", print_nhex}, {"#X", print_nupperhex}, {"#i", print_int}, {"#d", print_int},
-		{"#u", print_uint}, {"+i", print_plusint}, {"+d", print_plusint}, {"+u", print_uint},
-		{"+o", print_oct}, {"+x", print_hex}, {"+X", print_upperhex}, {" i", print_spaceint},
-		{" d", print_spaceint}, {" u", print_uint}, {" o", print_oct}, {" x", print_hex},
-		{" X", print_upperhex}, {"li", print_lint}, {"ld", print_lint}, {"lu", print_luint},
-		{"lo", print_loct}, {"lx", print_lhex}, {"lX", print_lupperhex}, {"hi", print_shortint},
-		{"hd", print_shortint}, {"hu", print_shortuint}, {"ho", print_shortoct}, {"hx", print_shorthex},
-		{"hX", print_shortupperhex}, {NULL, NULL}
+		{"c", print_char}, {"s", print_str}, {"i", print_int},
+		{"d", print_int}, {"b", print_binary}, {"u", print_uint},
+		{"o", print_oct}, {"x", print_hex}, {"X", print_upperhex},
+		{"S", print_string_S}, {"p", print_address}, {"#o", print_noct},
+		{"#x", print_nhex}, {"#X", print_nupperhex}, {"#i", print_int},
+		{"#d", print_int}, {"#u", print_uint}, {"+i", print_plusint},
+		{"+d", print_plusint}, {"+u", print_uint}, {"+o", print_oct},
+		{"+x", print_hex}, {"+X", print_upperhex}, {" i", print_spaceint},
+		{" d", print_spaceint}, {" u", print_uint}, {" o", print_oct},
+		{" x", print_hex}, {" X", print_upperhex}, {"li", print_lint},
+		{"ld", print_lint}, {"lu", print_luint}, {"lo", print_loct},
+		{"lx", print_lhex}, {"lX", print_lupperhex}, {"hi", print_shortint},
+		{"hd", print_shortint}, {"hu", print_shortuint}, {"ho", print_shortoct},
+		{"hx", print_shorthex}, {"hX", print_shortupperhex}, {"R", print_rot},
+		{"r", print_rev}, {"%", print_percent}, {" %", print_percent},
+		{"l", print_percent}, {"h", print_percent}, {" +i", print_plusint},
+		{" +d", print_plusint}, {"+ i", print_plusint}, {"+ d", print_plusint},
+		{NULL, NULL}
+
 
 	};
 	int i = 0, j = 0, first_index;
@@ -114,11 +126,7 @@ int (*get_format_func(const char *s, int index))(va_list, char *, unsigned int)
 				break;
 		}
 		else
-		{
-			j = 0;
-			i++;
-			index = first_index;
-		}
+			j = 0, i++, index = first_index;
 	}
 	return (print[i].f);
 }

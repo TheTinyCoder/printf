@@ -5,7 +5,7 @@
  * print_rot - writes a str in ROT13
  * @args: arguments
  * @buf: pointer to buffer
- * @ibuf: index for buffer pointer
+ * @buf_index: index for buffer pointer
  * Return: number of chars printed.
  */
 
