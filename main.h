@@ -21,8 +21,10 @@ int _printf(const char *format, ...);
 
 /* prints a character */
 int print_char(va_list args, char *buf, unsigned int buf_index);
+
 /* prints a percentage */
 int print_percent(va_list __attribute__((unused)), char *, unsigned int);
+
 /* prints a string */
 int print_str(va_list args, char *buf, unsigned int buf_index);
 
@@ -31,9 +33,7 @@ int print_string_S(va_list args, char *buf, unsigned int buf_index);
 
 /* prints an integer */
 int print_int(va_list args, char *buf, unsigned int buf_index);
-/* prints an integer with + and space before it */
-int print_plusint(va_list arguments, char *buf, unsigned int ibuf);
-int print_spaceint(va_list args, char *buf, unsigned int buf_index);
+
 /* prints an integer in base 10 */
 int print_dec(va_list args);
 
@@ -49,6 +49,13 @@ int print_oct(va_list args, char *buf, unsigned int buf_index);
 
 /* prints an address */
 int print_address(va_list args, char *buf, unsigned int buf_index);
+
+/* handles flags */
+int print_plusint(va_list arguments, char *buf, unsigned int buf_index);
+int print_spaceint(va_list args, char *buf, unsigned int buf_index);
+int print_noct(va_list args, char *buf, unsigned int buf_index);
+int print_nhex(va_list args, char *buf, unsigned int buf_index);
+int print_nupperhex(va_list args, char *buf, unsigned int buf_index);
 
 /* util functions */
 int (*get_format_func(const char *s, int index))(va_list, char *, unsigned int);
