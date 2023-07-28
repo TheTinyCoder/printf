@@ -46,7 +46,9 @@ int all_format_functions(const char *s, int index)
 	print_format print[] = {
 		{"c", print_char}, {"s", print_str},
 		{"i", print_int}, {"d", print_int},
-		{" %", print_percent}, {NULL, NULL}
+		{" %", print_percent}, {"u", print_uint},
+		{"o", print_oct}, {"x", print_hex},
+		{"X", print_upperhex}, {NULL, NULL}
 	};
 	int i = 0, j = 0, first_index;
 
@@ -82,7 +84,9 @@ int (*get_format_func(const char *s, int index))(va_list, char *, unsigned int)
 	print_format print[] = {
 		{"c", print_char}, {"s", print_str},
 		{"i", print_int}, {"d", print_int},
-		{" %", print_percent}, {NULL, NULL},
+		{" %", print_percent}, {"u", print_uint},
+		{"o", print_oct}, {"x", print_hex},
+		{"X", print_upperhex}, {NULL, NULL}
 	};
 	int i = 0, j = 0, first_index;
 
