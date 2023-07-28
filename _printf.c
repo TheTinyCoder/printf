@@ -9,60 +9,48 @@
  * @format: character string
  * Return: number of characters printed excluding null byte
  */
+
+
 int _printf(const char *format, ...)
 {
-	va_list arg;
-	unsigned int flag, i, j, len = 0;
+	unsigned int i = 0, len = 0, buf_index = 0;
+	va_list args;
+	int (*function)(va_list, char *, unsigned int);
+	char *buffer;
 
-	print_format print[] = {
-		{"c", print_char}, {"s", print_str}, {"d", print_dec}, {"i", print_int}, {NULL, NULL}
-	};
-
-	va_start(arg, format);
-
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-	{
-		va_end(arg);
+	va_start(args, format), buffer = malloc(sizeof(char) * 1024);
+	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
+		return (-1);
+	if (!format[i])
 		return (0);
-	}
-
-	i = 0;
-	while (format[i] != '\0')
+	for (i = 0; format && format[i]; i++)
 	{
-		if (format[i] == '%' && format[i + 1] != '%')
+		if (format[i] == '%')
 		{
-			j = 0;
-			flag = 0;
-			while (print[j].p != NULL)
-			{
-				if (format[i + 1] == print[j].format[0])
+			if (format[i + 1] == '\0')
+			{	print_buf(buffer, buf_index), free(buffer), va_end(args);
+				return (-1);
+			}
+			else
+			{	function = get_format_func(format, i + 1);
+				if (function == NULL)
 				{
-					len += print[j].p(arg);
-					flag += 1;
-					i++;
+					if (format[i + 1] == ' ' && !format[i + 2])
+						return (-1);
+					handle_buf(buffer, format[i], buf_index), len++, i--;
 				}
-				j++;
-			}
-			if (flag == 0)
-			{
-				_putchar(format[i]);
-				len += 1;
-			}
-		}
-		else if (format[i] == '%' && format[i + 1] == '%')
-		{
-			_putchar('%');
-			i++;
-			len += 1;
+				else
+				{
+					len += function(args, buffer, buf_index);
+					i += all_format_functions(format, i + 1);
+				}
+			} i++;
 		}
 		else
-		{
-			_putchar(format[i]);
-			len += 1;
-		}
-		i++;
+			handle_buf(buffer, format[i], buf_index), len++;
+		for (buf_index = len; buf_index > 1024; buf_index -= 1024)
+			;
 	}
-	va_end(arg);
-
+	print_buf(buffer, buf_index), free(buffer), va_end(args);
 	return (len);
 }
