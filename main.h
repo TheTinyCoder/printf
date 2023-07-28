@@ -44,6 +44,9 @@ int print_upperhex(va_list args, char *buf, unsigned int buf_index);
 /* prints an integer as octal */
 int print_oct(va_list args, char *buf, unsigned int buf_index);
 
+/* prints an address */
+int print_address(va_list args, char *buf, unsigned int buf_index);
+
 /* util functions */
 int (*get_format_func(const char *s, int index))(va_list, char *, unsigned int);
 int all_format_functions(const char *s, int index);
