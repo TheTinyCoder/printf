@@ -65,3 +65,81 @@ int print_uint(va_list args, char *buf, unsigned int buf_index)
 	}
 	return (i);
 }
+
+
+/**
+ * print_plusint - print integer with + symbol
+ * @args: arguments
+ * @buf: pointer to buffer
+ * @buf_index: index for buffer pointer
+ * Return: number of chars printed
+ */
+
+int print_plusint(va_list args, char *buf, unsigned int buf_index)
+{
+	int input;
+	unsigned int in, temp, i, div;
+
+	input = va_arg(args, int);
+	if (input < 0)
+	{
+		in = input * -1;
+		buf_index = handle_buf(buf, '-', buf_index);
+	}
+	else
+	{
+		in = input;
+		buf_index = handle_buf(buf, '+', buf_index);
+	}
+	temp = in;
+	div = 1;
+	while (temp > 9)
+	{
+		div *= 10;
+		temp /= 10;
+	}
+	for (i = 0; div > 0; div /= 10, i++)
+	{
+		buf_index = handle_buf(buf, ((in / div) % 10) + '0', buf_index);
+	}
+	return (i + 1);
+}
+
+
+/**
+ * print_spaceint - prints int begining with space
+ * @args: arguments
+ * @buf: pointer to buffer
+ * @buf_index: index for buffer pointer
+ * Return: number of chars printed
+ */
+
+int print_spaceint(va_list args, char *buf, unsigned int buf_index)
+{
+	int input;
+	unsigned int in, temp, i, div;
+
+	input = va_arg(args, int);
+	if (input < 0)
+	{
+		in = input * -1;
+		buf_index = handle_buf(buf, '-', buf_index);
+	}
+	else
+	{
+		in = input;
+		buf_index = handle_buf(buf, ' ', buf_index);
+	}
+	temp = in;
+	div = 1;
+	while (temp > 9)
+	{
+		div *= 10;
+		temp /= 10;
+	}
+	for (i = 0; div > 0; div /= 10, i++)
+	{
+		buf_index = handle_buf(buf, ((in / div) % 10) + '0', buf_index);
+	}
+	return (i + 1);
+}

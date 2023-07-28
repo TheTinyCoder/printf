@@ -49,7 +49,14 @@ int all_format_functions(const char *s, int index)
 		{" %", print_percent}, {"u", print_uint},
 		{"o", print_oct}, {"x", print_hex},
 		{"X", print_upperhex}, {"S", print_string_S},
-		{"p", print_address}, {NULL, NULL}
+		{"p", print_address}, {"#i", print_int},
+		{"#d", print_int}, {"#u", print_uint},
+		{"+i", print_plusint}, {"+d", print_plusint},
+		{"+u", print_uint}, {"+o", print_oct},
+		{"+x", print_hex}, {"+X", print_upperhex},
+		{" i", print_spaceint}, {" d", print_spaceint},
+		{" u", print_uint}, {" o", print_oct},
+		{" x", print_hex}, {NULL, NULL}
 	};
 	int i = 0, j = 0, first_index;
 
@@ -88,7 +95,15 @@ int (*get_format_func(const char *s, int index))(va_list, char *, unsigned int)
 		{" %", print_percent}, {"u", print_uint},
 		{"o", print_oct}, {"x", print_hex},
 		{"X", print_upperhex}, {"S", print_string_S},
-		{"p", print_address}, {NULL, NULL}
+		{"p", print_address}, {"#i", print_int},
+		{"#d", print_int}, {"#u", print_uint},
+		{"+i", print_plusint}, {"+d", print_plusint},
+		{"+u", print_uint}, {"+o", print_oct},
+		{"+x", print_hex}, {"+X", print_upperhex},
+		{" i", print_spaceint}, {" d", print_spaceint},
+		{" u", print_uint}, {" o", print_oct},
+		{" x", print_hex}, {NULL, NULL}
+
 	};
 	int i = 0, j = 0, first_index;
 

@@ -31,6 +31,9 @@ int print_string_S(va_list args, char *buf, unsigned int buf_index);
 
 /* prints an integer */
 int print_int(va_list args, char *buf, unsigned int buf_index);
+/* prints an integer with + and space before it */
+int print_plusint(va_list arguments, char *buf, unsigned int ibuf);
+int print_spaceint(va_list args, char *buf, unsigned int buf_index);
 /* prints an integer in base 10 */
 int print_dec(va_list args);
 
