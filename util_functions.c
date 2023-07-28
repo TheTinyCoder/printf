@@ -84,12 +84,12 @@ int all_format_functions(const char *s, int index)
 
 
 /**
- * get_format_func - selects the correct function to perform the operation.
+ * get_format - selects the correct function to perform the operation.
  * @s: argument indentifier
  * @index: index for argument indentifier
  * Return: pointer to a function.
  */
-int (*get_format_func(const char *s, int index))(va_list, char *, unsigned int)
+int (*get_format(const char *s, int index))(va_list, char *, unsigned int)
 {
 	print_format print[] = {
 		{"c", print_char}, {"s", print_str}, {"i", print_int},

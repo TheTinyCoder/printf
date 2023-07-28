@@ -82,7 +82,7 @@ int print_rev(va_list args, char *buf, unsigned int buf_index);
 int print_rot(va_list args, char *buf, unsigned int buf_index);
 
 /* util functions */
-int (*get_format_func(const char *s, int index))(va_list, char *, unsigned int);
+int (*get_format(const char *s, int index))(va_list, char *, unsigned int);
 int all_format_functions(const char *s, int index);
 unsigned int handle_buf(char *buf, char c, unsigned int buf_index);
 int print_buf(char *buf, unsigned int buf_index);
