@@ -3,6 +3,7 @@
 
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 /**
  * struct specifiers - struct that links specifier to function
