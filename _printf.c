@@ -24,7 +24,7 @@ int _printf(const char *format, ...)
 					write(1, &format[i], 1), len++;
 					continue;
 				}
-				else if (format[i] && format[i] != '\n')
+				else
 				{
 					f = get_specifier_func(&format[i]);
 					if (f)
