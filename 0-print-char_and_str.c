@@ -23,10 +23,17 @@ int print_char(const char *c)
 int print_str(const char *s)
 {
 	int i = 0;
+	char *x = "(null)";
+
 	if (s)
 	{
 		for (; s[i]; i++)
 			write(1, &s[i], 1);
+	}
+	else
+	{
+		for (; x[i]; i++)
+			write(1, &x[i], 1);
 	}
 
 	return (i);
