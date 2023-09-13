@@ -27,6 +27,8 @@ int main(void)
 	_printf(NULL);
 	_printf("%c", '\0');
 	_printf("%\n");
+	_printf("%");
+	_printf("\n");
 	_printf("%!\n");
 	_printf("%K\n");
 

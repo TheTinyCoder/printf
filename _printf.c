@@ -38,7 +38,7 @@ int _printf(const char *format, ...)
 				}
 				else
 				{
-					len += format[i] == '\n' ? 0 : write(1, &format[i - 1], 1);
+					len += !format[i] ? 0 : write(1, &format[i - 1], 1);
 					len += write(1, &format[i], 1);
 				}
 			}
