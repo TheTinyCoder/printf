@@ -1,56 +1,37 @@
 #include "main.h"
-#include <stdlib.h>
-#include <stdarg.h>
 
 /**
- * _printf - function entry-point
- *
- * Description: produces output according to a format
- * @format: character string
- * Return: number of characters printed excluding null byte
+ * _printf - produces output according to a format
+ * @format: pointer to string
+ * Return: number of characters printed (excluding the null byte)
  */
-
 
 int _printf(const char *format, ...)
 {
-	unsigned int i = 0, len = 0, buf_index = 0;
-	va_list args;
-	int (*function)(va_list, char *, unsigned int);
-	char *buffer;
+	int i, (*f)(const char *s), len = 0;
+	va_list ptr;
 
-	va_start(args, format), buffer = malloc(sizeof(char) * 1024);
-	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
-		return (-1);
-	if (!format[i])
-		return (0);
-	for (i = 0; format && format[i]; i++)
+	va_start(ptr, format);
+	for (i = 0; format[i]; i++)
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && format[i + 1])
 		{
-			if (format[i + 1] == '\0')
-			{	print_buf(buffer, buf_index), free(buffer), va_end(args);
-				return (-1);
+			if (format[i + 1] == '%')
+			{
+				write(1, &format[i + 1], 1), len++, i += 2;
+				continue;
 			}
 			else
-			{	function = get_format(format, i + 1);
-				if (function == NULL)
-				{
-					if (format[i + 1] == ' ' && !format[i + 2])
-						return (-1);
-					handle_buf(buffer, format[i], buf_index), len++, i--;
-				}
-				else
-				{
-					len += function(args, buffer, buf_index);
-					i += all_format_functions(format, i + 1);
-				}
-			} i++;
+				f = get_specifier_func(&format[i + 1]);
+			if (f)
+			{
+				len += f(va_arg(ptr, char *));
+			}
 		}
-		else
-			handle_buf(buffer, format[i], buf_index), len++;
-		for (buf_index = len; buf_index > 1024; buf_index -= 1024)
-			;
+		write(1, &format[i], 1), len++;
+
 	}
-	print_buf(buffer, buf_index), free(buffer), va_end(args);
+
+	va_end(ptr);
 	return (len);
 }
