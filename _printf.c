@@ -11,40 +11,41 @@ int _printf(const char *format, ...)
 	int i, (*f)(const char *s), len = 0;
 	va_list args;
 
+	if (!format)
+		return (-1);
+	if (!format[0])
+		return (len);
 	va_start(args, format);
-	if (format)
+	for (i = 0; format[i]; i++)
 	{
-		for (i = 0; format[i]; i++)
+		if (format[i] == '%')
 		{
+			i++;
 			if (format[i] == '%')
+				write(1, &format[i], 1), len++;
+			else if (!format[i])
 			{
-				i++;
-				if (format[i] == '%')
+				va_end(args);
+				return (len);
+			}
+			else
+			{
+				f = get_specifier_func(&format[i]);
+				if (f)
 				{
-					write(1, &format[i], 1), len++;
+					len += f(va_arg(args, char *));
 					continue;
 				}
 				else
 				{
-					f = get_specifier_func(&format[i]);
-					if (f)
-					{
-						len += f(va_arg(args, char *));
-						continue;
-					}
-					else
-					{
-						len += write(1, &format[i - 1], 1);
-						len += write(1, &format[i], 1);
-					}
+					len += format[i] == '\n' ? 0 : write(1, &format[i - 1], 1);
+					len += write(1, &format[i], 1);
 				}
 			}
-			else
-				write(1, &format[i], 1), len++;
-
 		}
+		else
+			write(1, &format[i], 1), len++;
 	}
-
 	va_end(args);
 	return (len);
 }
