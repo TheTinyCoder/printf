@@ -8,9 +8,10 @@
 
 int print_char(const char *c)
 {
+	char *x = ".";
 	if (c)
 		return (write(1, &c, 1));
-	return (-1);
+	return (write(1, &x, 1));
 }
 
 
