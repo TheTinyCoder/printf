@@ -32,10 +32,7 @@ int _printf(const char *format, ...)
 			{
 				f = get_specifier_func(&format[i]);
 				if (f)
-				{
 					len += f(va_arg(args, char *));
-					continue;
-				}
 				else
 				{
 					len += write(1, &format[i - 1], 1);
