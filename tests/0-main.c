@@ -25,7 +25,8 @@ int main(void)
 	_printf("%s%c%c%c%s%%%s%c", "Loading ", '.', '.', '.', " 99", " Please wait", '\n');
 	_printf("css%ccs%scscscs\n", 'T', "Test");
 	_printf(NULL);
-	_printf("%c", '\0');
+	len2 = _printf("%c", '\0');
+	printf("->%d\n", len2);
 	_printf("%\n");
 	_printf("%");
 	_printf("\n");
