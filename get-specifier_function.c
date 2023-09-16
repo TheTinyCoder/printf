@@ -6,11 +6,12 @@
  * Return: pointer to function or NULL
  */
 
-int (*get_specifier_func(const char *c))(const char *)
+int (*get_specifier_func(const char *c))(va_list args)
 {
 	int i;
 	specifier_funcs funcs[] = {
 		{"c", print_char}, {"s", print_str},
+		{"d", print_decimal}, {"i", print_integer},
 		{NULL, NULL}
 	};
 
