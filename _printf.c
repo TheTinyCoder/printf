@@ -8,7 +8,7 @@
 
 int _printf(const char *format, ...)
 {
-	int i, (*f)(const char *s), len = 0;
+	int i, (*f)(va_list), len = 0;
 	va_list args;
 
 	if (!format || (format[0] == '%' && !format[1]))
@@ -32,7 +32,7 @@ int _printf(const char *format, ...)
 			{
 				f = get_specifier_func(&format[i]);
 				if (f)
-					len += f(va_arg(args, char *));
+					len += f(args);
 				else
 				{
 					len += write(1, &format[i - 1], 1);

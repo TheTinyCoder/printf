@@ -2,26 +2,28 @@
 
 /**
  * print_char - writes a character to stdout
- * @c: pointer to character
+ * @args: va_list
  * Return: 1 on success
  */
 
-int print_char(const char *c)
+int print_char(va_list args)
 {
+	char *c = va_arg(args, char *);
+
 	return (write(1, &c, 1));
 }
 
 
 /**
  * print_str - writes a string to stdout
- * @s: pointer to string
+ * @args: va_list
  * Return: length of string
  */
 
-int print_str(const char *s)
+int print_str(va_list args)
 {
 	int i = 0;
-	char *x = "(null)";
+	char *x = "(null)", *s = va_arg(args, char *);
 
 	if (s)
 	{
