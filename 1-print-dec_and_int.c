@@ -25,6 +25,7 @@ int print_decimal(va_list args)
 			for (; d[i]; i++)
 				write(1, &d[i], 1);
 		}
+		free(d);
 		return (i);
 	}
 	return (write(1, &x, 1));
@@ -66,6 +67,7 @@ int print_integer(va_list args)
 		{
 			for (; y[d]; d++)
 				write(1, &y[d], 1);
+			free(y);
 		}
 		return (d);
 	}
