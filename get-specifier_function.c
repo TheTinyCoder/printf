@@ -12,6 +12,7 @@ int (*get_specifier_func(const char *c))(va_list args)
 	specifier_funcs funcs[] = {
 		{"c", print_char}, {"s", print_str},
 		{"d", print_decimal}, {"i", print_integer},
+		{"b", print_binary},
 		{NULL, NULL}
 	};
 
