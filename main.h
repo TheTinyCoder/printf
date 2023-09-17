@@ -31,13 +31,18 @@ int print_str(va_list);
 int print_decimal(va_list);
 int print_integer(va_list);
 
+/* print binary: 'b' */
+int print_binary(va_list args);
 
 
 
 /***** UTIL FUNCTIONS ******/
 
-/* integer to (char *) conversion */
+/* integer to string conversion */
 char *int_to_str(int);
+
+/* string to integer conversion */
+int _atoi(const char *s);
 
 /* hex to decimal conversion */
 char *hex_to_decimal(const char *);
@@ -45,8 +50,17 @@ char *hex_to_decimal(const char *);
 /* octal to decimal conversion */
 char *octal_to_decimal(const char *);
 
-/* hex to decimal conversion */
+/* binary to decimal conversion */
 char *binary_to_decimal(const char *);
+
+/* hex to binary conversion */
+char *hex_to_binary(const char *);
+
+/* octal to binary conversion */
+char *octal_to_binary(const char *);
+
+/* decimal to binary conversion */
+char *decimal_to_binary(const char *);
 
 #endif
 
