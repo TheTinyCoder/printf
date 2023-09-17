@@ -30,3 +30,28 @@ char *int_to_str(int d)
 	return (NULL);
 
 }
+
+
+/**
+ * _atoi - converts str to int
+ * @s: string
+ * Return: int
+ */
+
+int _atoi(const char *s)
+{
+	int i = 0, j = 1, k, l = 0, neg = 0;
+
+	if (s[0] == '-')
+		neg = 1;
+
+	for (; s[i]; i++)
+		j *= neg == 1 && i == 0 ? 1 : 10;
+	j /= 10;
+	for (k = neg; k < i; k++)
+		l += ((s[k] - 48) * j), j /= 10;
+
+	l *= neg == 1 ? -1 : 1;
+	return (l);
+}
+
