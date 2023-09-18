@@ -16,7 +16,7 @@ int main(void)
 	len = _printf("%b\n", 1024);
 	len2 = _printf("%b\n", 1024);
 
-	_printf("%b\n", -1024);
+	_printf("%d->", _printf("%b\n", -1024));
 	_printf("%b\n", 0);
 	_printf("%b\n", UINT_MAX);
 	_printf("%b\n", UINT_MAX + 1024);
