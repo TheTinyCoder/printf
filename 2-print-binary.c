@@ -8,39 +8,34 @@
 
 int print_binary(va_list args)
 {
-	int i = 0, j = va_arg(args, int), k, neg;
-	char w = '-', x = '0', *y, *z;
+	int neg;
+	long int j = va_arg(args, long int);
+	char x = '0';
 
 	neg = j < 0 ? 1 : 0;
-	y = neg > 0 ? int_to_str(j * -1) : int_to_str(j);
-	if (y)
-	{
-		if (y[0] == 48 && y[1])
-		{
-			if (y[1] == 'x')
-				z = hex_to_binary(y);
-			else if (y[1] == 'b')
-				z = y;
-			else
-				z = octal_to_binary(y);
-			if (neg > 0)
-				i += write(1, &w, 1);
-			for (k = 0; z[k]; k++)
-				i += write(1, &z[k], 1);
-
-		}
-		else
-		{
-			z = decimal_to_binary(y);
-			if (neg > 0)
-				i += write(1, &w, 1);
-			for (k = 0; z[k]; k++)
-				i += write(1, &z[k], 1);
-			free(y);
-		}
-		free(z);
-		return (i);
-	}
+	j = neg > 0 ? UINT_MAX + j : j;
+	if (j)
+		return (binary_recursion(j, 0));
 	return (write(1, &x, 1));
 }
 
+
+/**
+ * binary_recursion - prints each binary value of integer recursively
+ * @j: integer
+ * @count: bytes
+ * Return: number of bytes printed
+ */
+
+int binary_recursion(long int j, int count)
+{
+	char c;
+
+	if (j == 0)
+		return (count);
+
+	c = (j % 2) + 48;
+	count += binary_recursion((j / 2), count + 1);
+	write(1, &c, 1);
+	return (count);
+}
