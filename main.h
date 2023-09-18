@@ -33,6 +33,7 @@ int print_integer(va_list);
 
 /* print binary: 'b' */
 int print_binary(va_list args);
+int binary_recursion(long int j, int count);
 
 
 
@@ -52,15 +53,6 @@ char *octal_to_decimal(const char *);
 
 /* binary to decimal conversion */
 char *binary_to_decimal(const char *);
-
-/* hex to binary conversion */
-char *hex_to_binary(const char *);
-
-/* octal to binary conversion */
-char *octal_to_binary(const char *);
-
-/* decimal to binary conversion */
-char *decimal_to_binary(const char *);
 
 #endif
 
