@@ -10,7 +10,7 @@
 int print_binary(va_list args)
 {
 	int i = 0;
-	unsigned long int j = va_arg(args, unsigned long int), k;
+	unsigned int j = va_arg(args, int), k;
 	char x = '0';
 
 	if (j)
@@ -30,7 +30,7 @@ int print_binary(va_list args)
  * Return: void
  */
 
-void binary_recursion(unsigned long int j)
+void binary_recursion(unsigned int j)
 {
 	char c;
 
