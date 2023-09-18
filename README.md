@@ -18,6 +18,8 @@ A custom printf function
 ## Modus Operandi
 
 - If `NULL` is passed to the function, returns **-1**
+- Else If "%" is passed to the function, returns **0**
+- Else, returns the number of bytes printed
 
 ### Specifiers
 
@@ -31,4 +33,11 @@ A custom printf function
 
 #### Decimal Integer & Other Base Integers: %d and %i
 
+    - If octal or hex is passed, to **%d**, decimal base is assumed
+    - If octal, binary or hex is passed to **%i** number is first converted to decimal then printed
 
+#### Binary: %b
+    - Takes an integer and converts to unsigned int before converting to binary:
+        - Thus if number is negative, number becomes `UINT_MAX + (n)` where n is a negative number
+
+#### Unsigned Integers, Octal, Hex(lowercase) & Hex(uppercase): %u, %o, %x and %X
