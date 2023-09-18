@@ -46,7 +46,7 @@ int main(void)
     printf("Len:[%d]\n", len2);
     _printf("Unknown:[%r]\n");
     _printf("%d->", _printf("%b\n", -1024));
-    _printf("%b\n", UINT_MAX);
+    _printf("%b\n", UINT_MAX + 1024);
     _printf("Unknown:[%r]\n");
     return (0);
 }

@@ -33,7 +33,7 @@ int print_integer(va_list);
 
 /* print binary: 'b' */
 int print_binary(va_list args);
-void binary_recursion(long int j);
+void binary_recursion(unsigned long int j);
 
 
 

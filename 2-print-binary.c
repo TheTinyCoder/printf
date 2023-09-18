@@ -1,4 +1,5 @@
 #include "main.h"
+#include "stdio.h"
 
 /**
  * print_binary - writes binary version of input to stdout
@@ -8,12 +9,10 @@
 
 int print_binary(va_list args)
 {
-	int i = 0, neg;
-	long int j = va_arg(args, long int), k;
+	int i = 0;
+	unsigned long int j = va_arg(args, unsigned long int), k;
 	char x = '0';
 
-	neg = j < 0 ? 1 : 0;
-	j = neg > 0 ? UINT_MAX + j : j;
 	if (j)
 	{
 		for (k = j; k > 0; k /= 2)
@@ -31,7 +30,7 @@ int print_binary(va_list args)
  * Return: void
  */
 
-void binary_recursion(long int j)
+void binary_recursion(unsigned long int j)
 {
 	char c;
 
