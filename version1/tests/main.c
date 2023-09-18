@@ -1,6 +1,6 @@
 #include <limits.h>
 #include <stdio.h>
-#include "main.h"
+#include "../main.h"
 
 /**
  * main - Entry point
@@ -45,6 +45,7 @@ int main(void)
     _printf("Len:[%d]\n", len);
     printf("Len:[%d]\n", len2);
     _printf("Unknown:[%r]\n");
-    printf("Unknown:[%r]\n");
+    _printf("%b\n", -1024);
+    _printf("Unknown:[%r]\n");
     return (0);
 }
