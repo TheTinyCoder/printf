@@ -6,7 +6,7 @@ A custom printf function
 
    - Write your main function and use `_printf` instead of `printf`. Example:
     `_printf("String: %s\n", "I am a string !");`
-   - Run:
+   - To compile:
 
     `$ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format *.c`
 
