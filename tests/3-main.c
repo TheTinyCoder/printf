@@ -14,7 +14,7 @@ int main(void)
 	long int res = INT_MAX;
 
 	len = _printf("%u\n", 1024);
-	len2 = _printf("%u\n", 1024);
+	len2 = printf("%u\n", 1024);
 
 	_printf("%u\n", -1024);
 	_printf("%u\n", 0);

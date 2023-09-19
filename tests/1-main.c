@@ -13,7 +13,7 @@ int main(void)
 	int len, len2;
 
 	len = _printf("%d\n", 1024);
-	len2 = _printf("%d\n", 1024);
+	len2 = printf("%d\n", 1024);
 
 	_printf("%d\n", -1024);
 	_printf("%d\n", 0);

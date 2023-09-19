@@ -9,7 +9,7 @@
 
 int _printf(const char *format, ...)
 {
-	int i, (*f)(va_list, char *, int), len = 0;
+	int i, index = 0, (*f)(va_list, char *, int), len = 0, x;
 	va_list args;
 	char *buf = malloc(sizeof(char) * BUF_SIZE);
 
@@ -18,36 +18,35 @@ int _printf(const char *format, ...)
 		free(buf);
 		return (-1);
 	}
-	if (!format[0])
-		return (len);
-	va_start(args, format);
+	va_start(args, format), index = 0;
 	for (i = 0; format[i]; i++)
 	{
 		if (format[i] == '%')
 		{
 			i++;
 			if (format[i] == '%')
-				use_buffer(buf, len, format[i]), len++;
+				use_buffer(buf, index, format[i]), len++, index++;
 			else if (!format[i])
 			{
-				print_buffer(buf, len), free(buf), va_end(args);
+				print_buffer(buf, index), free(buf), va_end(args);
 				return (len);
 			}
 			else
 			{
 				f = get_specifier_func(&format[i]);
 				if (f)
-					len += f(args, buf, len);
+					x = f(args, buf, index), index += x, len += x;
 				else
 				{
-					use_buffer(buf, len, format[i - 1]), len++;
-					use_buffer(buf, len, format[i]), len++;
+					use_buffer(buf, index, format[i - 1]), len++, index++;
+					use_buffer(buf, index, format[i]), len++, index++;
 				}
 			}
 		}
 		else
-			use_buffer(buf, len, format[i]), len++;
+			use_buffer(buf, index, format[i]), len++, index++;
+		index = index == BUF_SIZE ? 0 : index;
 	}
-	print_buffer(buf, len), free(buf), va_end(args);
+	print_buffer(buf, index), free(buf), va_end(args);
 	return (len);
 }
