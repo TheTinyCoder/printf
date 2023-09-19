@@ -33,11 +33,11 @@ int print_str(va_list args, char *buf, int index)
 	if (s)
 	{
 		for (; s[i]; i++)
-			use_buffer(buf, index, s[i]), index++;
+			index = use_buffer(buf, index, s[i]);
 		return (i);
 	}
 	for (; x[i]; i++)
-		use_buffer(buf, index, x[i]), index++;
+		index = use_buffer(buf, index, x[i]);
 
 	return (6);
 }

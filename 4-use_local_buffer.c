@@ -5,14 +5,16 @@
  * @buf: buffer
  * @index: buffer index
  * @c: character to add to buffer
- * Return: void
+ * Return: next index
  */
 
-void use_buffer(char *buf, int index, char c)
+int use_buffer(char *buf, int index, char c)
 {
 	if (index == BUF_SIZE)
-		print_buffer(buf, index);
-	buf[index] = c;
+		print_buffer(buf, index), index = 0;
+	else
+		buf[index] = c, index++;
+	return (index);
 }
 
 

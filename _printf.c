@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 		{
 			i++;
 			if (format[i] == '%')
-				use_buffer(buf, index, format[i]), len++, index++;
+				index = use_buffer(buf, index, format[i]), len++;
 			else if (!format[i])
 			{
 				print_buffer(buf, index), free(buf), va_end(args);
@@ -38,13 +38,13 @@ int _printf(const char *format, ...)
 					x = f(args, buf, index), index += x, len += x;
 				else
 				{
-					use_buffer(buf, index, format[i - 1]), len++, index++;
-					use_buffer(buf, index, format[i]), len++, index++;
+					index = use_buffer(buf, index, format[i - 1]), len++;
+					index = use_buffer(buf, index, format[i]), len++;
 				}
 			}
 		}
 		else
-			use_buffer(buf, index, format[i]), len++, index++;
+			index = use_buffer(buf, index, format[i]), len++;
 		index = index == BUF_SIZE ? 0 : index;
 	}
 	print_buffer(buf, index), free(buf), va_end(args);

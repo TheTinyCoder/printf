@@ -49,7 +49,7 @@ int print_hex_upper(va_list, char *, int);
 void hex_upper_recursion(unsigned int, char *, int);
 
 /* use a local buffer of BUF_SIZE (1024) to reduce calls to write */
-void use_buffer(char *buffer, int buffer_index, char c);
+int use_buffer(char *buffer, int buffer_index, char c);
 void print_buffer(char *buffer, int size);
 
 

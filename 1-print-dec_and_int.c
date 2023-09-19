@@ -19,13 +19,13 @@ int print_decimal(va_list args, char *buf, int index)
 		{
 			j = d[1] == 'x' || d[1] == 'b' ? 2 : 1;
 			for (; d[j]; j++)
-				use_buffer(buf, index, d[j]), i++, index++;
+				index = use_buffer(buf, index, d[j]), i++;
 
 		}
 		else
 		{
 			for (; d[i]; i++)
-				use_buffer(buf, index, d[i]), index++;
+				index = use_buffer(buf, index, d[i]);
 
 		}
 		free(d);
@@ -65,14 +65,14 @@ int print_integer(va_list args, char *buf, int index)
 					z = octal_to_decimal(y);
 			}
 			for (; z[d]; d++)
-				use_buffer(buf, index, z[d]), index++;
+				index = use_buffer(buf, index, z[d]);
 			free(z);
 
 		}
 		else
 		{
 			for (; y[d]; d++)
-				use_buffer(buf, index, y[d]), index++;
+				index = use_buffer(buf, index, y[d]);
 			free(y);
 		}
 		return (d);
