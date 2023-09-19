@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
  * _printf - produces output according to a format
@@ -8,13 +9,15 @@
 
 int _printf(const char *format, ...)
 {
-	int i, (*f)(va_list), len = 0;
+	int i, (*f)(va_list, char *, int), len = 0;
 	va_list args;
+	char *buf = malloc(sizeof(char) * BUF_SIZE);
 
-	if (!format || (format[0] == '%' && !format[1]))
+	if (!format || !buf || (format[0] == '%' && !format[1]))
+	{
+		free(buf);
 		return (-1);
-	if (!format[0])
-		return (len);
+	}
 	va_start(args, format);
 	for (i = 0; format[i]; i++)
 	{
@@ -22,27 +25,27 @@ int _printf(const char *format, ...)
 		{
 			i++;
 			if (format[i] == '%')
-				write(1, &format[i], 1), len++;
+				use_buffer(buf, len, format[i]), len++;
 			else if (!format[i])
 			{
-				va_end(args);
+				print_buffer(buf, len), free(buf), va_end(args);
 				return (len);
 			}
 			else
 			{
 				f = get_specifier_func(&format[i]);
 				if (f)
-					len += f(args);
+					len += f(args, buf, len);
 				else
 				{
-					len += write(1, &format[i - 1], 1);
-					len += write(1, &format[i], 1);
+					use_buffer(buf, len, format[i - 1]), len++;
+					use_buffer(buf, len, format[i]), len++;
 				}
 			}
 		}
 		else
-			write(1, &format[i], 1), len++;
+			use_buffer(buf, len, format[i]), len++;
 	}
-	va_end(args);
+	print_buffer(buf, len), free(buf), va_end(args);
 	return (len);
 }

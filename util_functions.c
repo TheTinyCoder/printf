@@ -54,4 +54,3 @@ int _atoi(const char *s)
 	l *= neg == 1 ? -1 : 1;
 	return (l);
 }
-

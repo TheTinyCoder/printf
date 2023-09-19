@@ -6,7 +6,7 @@
  * Return: pointer to function or NULL
  */
 
-int (*get_specifier_func(const char *c))(va_list args)
+int (*get_specifier_func(const char *c))(va_list, char *, int)
 {
 	int i;
 	specifier_funcs funcs[] = {
