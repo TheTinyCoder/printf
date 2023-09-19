@@ -35,6 +35,18 @@ int print_integer(va_list);
 int print_binary(va_list args);
 void binary_recursion(unsigned int j);
 
+/* print unsigned int, octal & hex(lowercase & upper): 'u', 'o', 'x' & 'X' */
+int print_uint(va_list args);
+void uint_recursion(unsigned int j);
+int print_octal(va_list args);
+void octal_recursion(unsigned int j);
+int print_hex(va_list args);
+void hex_recursion(unsigned int j);
+int print_hex_upper(va_list args);
+void hex_upper_recursion(unsigned int j);
+
+
+
 
 
 /***** UTIL FUNCTIONS ******/
