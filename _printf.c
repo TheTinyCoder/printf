@@ -18,6 +18,8 @@ int _printf(const char *format, ...)
 		free(buf);
 		return (-1);
 	}
+	if (!format[0])
+		return (len);
 	va_start(args, format);
 	for (i = 0; format[i]; i++)
 	{
