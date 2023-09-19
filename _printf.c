@@ -45,7 +45,6 @@ int _printf(const char *format, ...)
 		}
 		else
 			index = use_buffer(buf, index, format[i]), len++;
-		index = index == BUF_SIZE ? 0 : index;
 	}
 	print_buffer(buf, index), free(buf), va_end(args);
 	return (len);
