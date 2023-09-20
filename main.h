@@ -52,6 +52,9 @@ void hex_upper_recursion(unsigned int, char *, int);
 int use_buffer(char *buffer, int buffer_index, char c);
 void print_buffer(char *buffer, int size);
 
+/* print custom string: 's' */
+int print_custom_str(va_list, char *, int);
+
 
 
 
