@@ -12,8 +12,8 @@ int use_buffer(char *buf, int index, char c)
 {
 	if (index == BUF_SIZE)
 		print_buffer(buf, index), index = 0;
-	else
-		buf[index] = c, index++;
+
+	buf[index] = c, index++;
 	return (index);
 }
 

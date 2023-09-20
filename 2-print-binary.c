@@ -12,13 +12,18 @@ int print_binary(va_list args, char *buf, int index)
 {
 	int i = 0;
 	unsigned int j = va_arg(args, int), k;
-	char x = '0';
+	char x = '0', *y;
 
 	if (j)
 	{
 		for (k = j; k > 0; k /= 2)
 			i++;
-		binary_recursion(j, buf, (index + i - 1));
+		y = malloc(sizeof(char) * (i + 1));
+		y[i] = '\0';
+		binary_recursion(j, y, (i - 1));
+		for (k = 0; y[k]; k++)
+			index = use_buffer(buf, index, y[k]);
+		free(y);
 		return (i);
 	}
 	use_buffer(buf, index, x);
@@ -27,14 +32,14 @@ int print_binary(va_list args, char *buf, int index)
 
 
 /**
- * binary_recursion - prints each binary value of integer recursively
+ * binary_recursion - sends each binary value of int to array recursively
  * @j: integer
- * @buf: buffer
- * @last_index: last index of binary
+ * @arr: array to hold binary
+ * @last_index: last index of array
  * Return: void
  */
 
-void binary_recursion(unsigned int j, char *buf, int last_index)
+void binary_recursion(unsigned int j, char *arr, int last_index)
 {
 	char c;
 
@@ -42,7 +47,7 @@ void binary_recursion(unsigned int j, char *buf, int last_index)
 		return;
 
 	c = (j % 2) + 48;
-	binary_recursion(j / 2, buf, last_index - 1);
-	use_buffer(buf, last_index, c);
+	binary_recursion(j / 2, arr, last_index - 1);
+	arr[last_index] = c;
 
 }

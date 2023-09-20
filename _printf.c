@@ -9,7 +9,7 @@
 
 int _printf(const char *format, ...)
 {
-	int i, index = 0, (*f)(va_list, char *, int), len = 0, x;
+	int i, index = 0, (*f)(va_list, char *, int), len = 0;
 	va_list args;
 	char *buf = malloc(sizeof(char) * BUF_SIZE);
 
@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 		{
 			i++;
 			if (format[i] == '%')
-				index = use_buffer(buf, index, format[i]), len++;
+				use_buffer(buf, index, format[i]), len++;
 			else if (!format[i])
 			{
 				print_buffer(buf, index), free(buf), va_end(args);
@@ -35,16 +35,17 @@ int _printf(const char *format, ...)
 			{
 				f = get_specifier_func(&format[i]);
 				if (f)
-					x = f(args, buf, index), index += x, len += x;
+					len += f(args, buf, index);
 				else
 				{
-					index = use_buffer(buf, index, format[i - 1]), len++;
-					index = use_buffer(buf, index, format[i]), len++;
+					use_buffer(buf, index, format[i - 1]), len++;
+					use_buffer(buf, index + 1, format[i]), len++;
 				}
 			}
 		}
 		else
-			index = use_buffer(buf, index, format[i]), len++;
+			use_buffer(buf, index, format[i]), len++;
+		index = len > BUF_SIZE ? len - BUF_SIZE : len;
 	}
 	print_buffer(buf, index), free(buf), va_end(args);
 	return (len);

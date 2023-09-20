@@ -12,13 +12,18 @@ int print_uint(va_list args, char *buf, int index)
 {
 	int i = 0;
 	unsigned int j = va_arg(args, int), k;
-	char x = '0';
+	char x = '0', *y;
 
 	if (j)
 	{
 		for (k = j; k > 0; k /= 10)
 			i++;
-		uint_recursion(j, buf, (index + i - 1));
+		y = malloc(sizeof(char) * (i + 1));
+		y[i] = '\0';
+		uint_recursion(j, y, (i - 1));
+		for (k = 0; y[k]; k++)
+			index = use_buffer(buf, index, y[k]);
+		free(y);
 		return (i);
 
 	}
@@ -28,14 +33,14 @@ int print_uint(va_list args, char *buf, int index)
 
 
 /**
- * uint_recursion - prints each value of unsigned integer recursively
+ * uint_recursion - sends each value of unsigned int to array recursively
  * @j: integer
- * @buf: buffer
+ * @arr: array to hold uint
  * @last_index: last index of uint
  * Return: void
  */
 
-void uint_recursion(unsigned int j, char *buf, int last_index)
+void uint_recursion(unsigned int j, char *arr, int last_index)
 {
 	char c;
 
@@ -43,8 +48,8 @@ void uint_recursion(unsigned int j, char *buf, int last_index)
 		return;
 
 	c = (j % 10) + 48;
-	uint_recursion(j / 10, buf, last_index - 1);
-	use_buffer(buf, last_index, c);
+	uint_recursion(j / 10, arr, last_index - 1);
+	arr[last_index] = c;
 }
 
 
@@ -60,13 +65,18 @@ int print_octal(va_list args, char *buf, int index)
 {
 	int i = 0;
 	unsigned int j = va_arg(args, int), k;
-	char x = '0';
+	char x = '0', *y;
 
 	if (j)
 	{
 		for (k = j; k > 0; k /= 8)
 			i++;
-		octal_recursion(j, buf, (index + i - 1));
+		y = malloc(sizeof(char) * (i + 1));
+		y[i] = '\0';
+		octal_recursion(j, y, (i - 1));
+		for (k = 0; y[k]; k++)
+			index = use_buffer(buf, index, y[k]);
+		free(y);
 		return (i);
 	}
 	use_buffer(buf, index, x);
@@ -75,14 +85,14 @@ int print_octal(va_list args, char *buf, int index)
 
 
 /**
- * octal_recursion - prints each octal value of integer recursively
+ * octal_recursion - sends each octal value of int to array recursively
  * @j: integer
- * @buf: buffer
- * @last_index: last index of octal
+ * @arr: array to hold octal
+ * @last_index: last index of array
  * Return: void
  */
 
-void octal_recursion(unsigned int j, char *buf, int last_index)
+void octal_recursion(unsigned int j, char *arr, int last_index)
 {
 	char c;
 
@@ -90,6 +100,6 @@ void octal_recursion(unsigned int j, char *buf, int last_index)
 		return;
 
 	c = (j % 8) + 48;
-	octal_recursion(j / 8, buf, last_index - 1);
-	use_buffer(buf, last_index, c);
+	octal_recursion(j / 8, arr, last_index - 1);
+	arr[last_index] = c;
 }
