@@ -5,6 +5,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <stdint.h>
 
 
 #define BUF_SIZE 1024
@@ -54,6 +55,12 @@ void print_buffer(char *buffer, int size);
 
 /* print custom string: 's' */
 int print_custom_str(va_list, char *, int);
+
+/* print an address: 'p' */
+int print_address(va_list, char *, int);
+void address_to_hex(unsigned long int, char *, int);
+
+
 
 
 
