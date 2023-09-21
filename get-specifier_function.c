@@ -15,6 +15,7 @@ int (*get_specifier_func(const char *c))(va_list, char *, int)
 		{"b", print_binary}, {"u", print_uint},
 		{"o", print_octal}, {"x", print_hex},
 		{"X", print_hex_upper}, {"S", print_custom_str},
+		{"p", print_address},
 		{NULL, NULL}
 	};
 
