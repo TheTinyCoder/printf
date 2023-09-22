@@ -23,6 +23,7 @@ specifier_funcs *get_specifier_func(const char *c)
 		{NULL, NULL}
 	};
 	specifierFuncPtr ptr;
+
 	ptr = malloc(sizeof(specifier_funcs));
 
 	for (i = 0; funcs[i].specifier; i++)

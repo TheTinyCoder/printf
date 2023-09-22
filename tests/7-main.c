@@ -54,6 +54,8 @@ int main(void)
 	_printf("iddi% diddiiddi\n", 1024);
 	_printf("% d\n", 10000);
 	_printf("% i\n", 10000);
+	_printf("% +d + % +d = % +d\n", INT_MIN, INT_MAX, (INT_MIN + INT_MAX));
+	_printf("% +i + % +i = % +i\n", INT_MIN, INT_MAX, (INT_MIN + INT_MAX));
 	_printf("%#o\n", 1024);
 	_printf("%#o\n", 0);
 	_printf("%#o\n", UINT_MAX);

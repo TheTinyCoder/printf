@@ -55,7 +55,7 @@ int print_hash_hex_upper(va_list args, char *buf, int index)
 		y[i] = '\0';
 		hex_upper_recursion(j, y, (i - 1));
 		index = use_buffer(buf, index, '0'), h++;
-		index = use_buffer(buf, index, 'x'), h++;
+		index = use_buffer(buf, index, 'X'), h++;
 		for (k = 0; y[k]; k++)
 			index = use_buffer(buf, index, y[k]);
 		free(y);
