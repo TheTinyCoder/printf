@@ -18,8 +18,10 @@ specifier_funcs *get_specifier_func(const char *c)
 		{"p", print_address}, {"+d", print_decimal_plus},
 		{"+i", print_integer_plus}, {" d", print_decimal_space},
 		{" i", print_integer_space}, {" +d", print_decimal_plus},
-		{" +i", print_integer_plus}, {"#x", print_hash_hex},
+		{" +i", print_integer_plus}, {"+ d", print_decimal_plus},
+		{"+ i", print_integer_plus}, {"#x", print_hash_hex},
 		{"#X", print_hash_hex_upper}, {"#o", print_hash_octal},
+		{" %", print_percent},
 		{NULL, NULL}
 	};
 	specifierFuncPtr ptr;
@@ -35,4 +37,20 @@ specifier_funcs *get_specifier_func(const char *c)
 		}
 	}
 	return (NULL);
+}
+
+/**
+ * print_percent - function entry-point
+ *
+ * Description: prints percent
+ * @args: va_list (unused)
+ * @buf: buffer
+ * @index: buffer index
+ * Return: number of bytes printed
+ */
+
+int print_percent(__attribute__((unused))va_list args__attribute, char *buf, int index)
+{
+	use_buffer(buf, index, '%');
+	return (1);
 }

@@ -37,10 +37,10 @@ int _printf(const char *format, ...)
 					len += funcPtr->f(args, buf, index);
 					i += _strlen(funcPtr->specifier) - 1, free(funcPtr);
 				}
-				else
+				else if (format[i] != ' ')
 				{
-					use_buffer(buf, index, format[i - 1]), len++;
-					use_buffer(buf, index + 1, format[i]), len++;
+					index = use_buffer(buf, index, format[i - 1]), len++;
+					use_buffer(buf, index, format[i]), len++;
 				}
 			}
 		}

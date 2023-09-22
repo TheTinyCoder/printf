@@ -77,6 +77,9 @@ int print_hash_hex(va_list, char *, int);
 int print_hash_hex_upper(va_list, char *, int);
 int print_hash_octal(va_list, char *, int);
 
+/* print percent: "% %" */
+int print_percent(va_list, char *, int);
+
 
 
 
