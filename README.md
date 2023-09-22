@@ -75,6 +75,8 @@ A custom printf function
    - Space, `' '`:
        - prints a space before a positive value not printed with the `+` flag
        - example: `_printf("% d", 1024)` prints ` 1024`
+       - if space is combined with '+' flag, then it just prints plus sign preceding positive values
+       - example: `_printf("% +d", 1024)` prints `+1024`
 
    - Hash (number sign), `#`:
        - prints prefix `0` to the output value when used with the **octal** conversion character `o`
