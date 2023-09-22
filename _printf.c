@@ -9,9 +9,10 @@
 
 int _printf(const char *format, ...)
 {
-	int i, index = 0, (*f)(va_list, char *, int), len = 0;
+	int i, index = 0, len = 0;
 	va_list args;
 	char *buf = malloc(sizeof(char) * BUF_SIZE);
+	specifierFuncPtr funcPtr;
 
 	if (!format || !buf || (format[0] == '%' && !format[1]))
 	{
@@ -27,18 +28,14 @@ int _printf(const char *format, ...)
 			if (format[i] == '%')
 				use_buffer(buf, index, format[i]), len++;
 			else if (!format[i])
-			{
-				print_buffer(buf, index), free(buf), va_end(args);
-				return (len);
-			}
+				continue;
 			else
 			{
-				f = get_specifier_func(&format[i]);
-				if (f)
+				funcPtr = get_specifier_func(&format[i]);
+				if (funcPtr)
 				{
-					len += f(args, buf, index);
-					i += format[i] == ' ' || format[i] == '+' || format[i] == '#'
-						? 1 : 0;
+					len += funcPtr->f(args, buf, index);
+					i += _strlen(funcPtr->specifier) - 1, free(funcPtr);
 				}
 				else
 				{
@@ -50,7 +47,6 @@ int _printf(const char *format, ...)
 		else
 			use_buffer(buf, index, format[i]), len++;
 		index = len > BUF_SIZE ? len - BUF_SIZE : len;
-	}
-	print_buffer(buf, index), free(buf), va_end(args);
+	} print_buffer(buf, index), free(buf), va_end(args);
 	return (len);
 }

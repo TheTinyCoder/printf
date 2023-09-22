@@ -6,7 +6,7 @@
  * Return: pointer to function or NULL
  */
 
-int (*get_specifier_func(const char *c))(va_list, char *, int)
+specifier_funcs *get_specifier_func(const char *c)
 {
 	int i;
 	specifier_funcs funcs[] = {
@@ -17,15 +17,21 @@ int (*get_specifier_func(const char *c))(va_list, char *, int)
 		{"X", print_hex_upper}, {"S", print_custom_str},
 		{"p", print_address}, {"+d", print_decimal_plus},
 		{"+i", print_integer_plus}, {" d", print_decimal_space},
-		{" i", print_integer_space}, {"#x", print_hash_hex},
+		{" i", print_integer_space}, {" +d", print_integer_plus},
+		{" +i", print_integer_plus}, {"#x", print_hash_hex},
 		{"#X", print_hash_hex_upper}, {"#o", print_hash_octal},
 		{NULL, NULL}
 	};
+	specifierFuncPtr ptr;
+	ptr = malloc(sizeof(specifier_funcs));
 
 	for (i = 0; funcs[i].specifier; i++)
 	{
 		if (_strcmp(funcs[i].specifier, c))
-			return (funcs[i].f);
+		{
+			*ptr = funcs[i];
+			return (ptr);
+		}
 	}
 	return (NULL);
 }

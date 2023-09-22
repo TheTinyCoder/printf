@@ -11,6 +11,10 @@
 #define BUF_SIZE 1024
 
 /**
+ * specifierFuncPtr - Typedef for struct specifier_functions
+ */
+typedef struct specifier_functions *specifierFuncPtr;
+/**
  * struct specifier_functions - struct that links specifier to function
  * @specifier: pointer to character (can be 'c', 's')
  * @f: pointer to function
@@ -22,7 +26,7 @@ typedef struct specifier_functions
 } specifier_funcs;
 
 /* function that returns correct fucntion per specifier */
-int (*get_specifier_func(const char *c))(va_list, char *, int);
+specifier_funcs *get_specifier_func(const char *c);
 
 /* _printf function */
 int _printf(const char *format, ...);
@@ -86,6 +90,9 @@ int _atoi(const char *);
 
 /* compare specifier string to input specifier */
 int _strcmp(char *s1, const char *s2);
+
+/* finds length of string */
+int _strlen(char *s);
 
 /* hex to decimal conversion */
 char *hex_to_decimal(const char *);
