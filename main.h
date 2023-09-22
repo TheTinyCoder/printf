@@ -45,13 +45,13 @@ void binary_recursion(unsigned int, char *, int);
 
 /* print unsigned int, octal & hex(lowercase & upper): 'u', 'o', 'x' & 'X' */
 int print_uint(va_list, char *, int);
-void uint_recursion(unsigned int, char *, int);
+void uint_recursion(unsigned long int, char *, int);
 int print_octal(va_list, char *, int);
-void octal_recursion(unsigned int, char *, int);
+void octal_recursion(unsigned long int, char *, int);
 int print_hex(va_list, char *, int);
-void hex_recursion(unsigned int, char *, int);
+void hex_recursion(unsigned long int, char *, int);
 int print_hex_upper(va_list, char *, int);
-void hex_upper_recursion(unsigned int, char *, int);
+void hex_upper_recursion(unsigned long int, char *, int);
 
 /* use a local buffer of BUF_SIZE (1024) to reduce calls to write */
 int use_buffer(char *buffer, int buffer_index, char c);
@@ -80,13 +80,32 @@ int print_hash_octal(va_list, char *, int);
 /* print percent: "% %" */
 int print_percent(va_list, char *, int);
 
+/* print long decimal & integers: "ld" & "li" */
+int print_long_decimal(va_list, char *, int);
+int print_long_integer(va_list, char *, int);
+
+/* print short decimal & integers: "hd" & "hi" */
+int print_short_decimal(va_list, char *, int);
+int print_short_integer(va_list, char *, int);
+
+/* print long uint, hex & octal: "lu", "lx", "lX" & "lo" */
+int print_long_uint(va_list, char *, int);
+int print_long_hex(va_list, char *, int);
+int print_long_hex_upper(va_list, char *, int);
+int print_long_octal(va_list, char *, int);
+
+/* print short uint, hex & octal: "hu", "hx", "hX" & "ho" */
+int print_short_uint(va_list, char *, int);
+int print_short_hex(va_list, char *, int);
+int print_short_hex_upper(va_list, char *, int);
+int print_short_octal(va_list, char *, int);
 
 
 
 /***** UTIL FUNCTIONS ******/
 
 /* integer to string conversion */
-char *int_to_str(int);
+char *int_to_str(long int);
 
 /* string to integer conversion */
 int _atoi(const char *);
