@@ -54,3 +54,26 @@ int _atoi(const char *s)
 	l *= neg == 1 ? -1 : 1;
 	return (l);
 }
+
+
+/**
+ * _strcmp -  function entry-point
+ *
+ * Description: 'compares specifier to input string'
+ * @s1: specifier string
+ * @s2: input string
+ * Return: 1 if strings are equal, 0 otherwise
+ */
+
+int _strcmp(char *s1, const char *s2)
+{
+	int i;
+
+	for (i = 0; s1[i] != '\0'; i++)
+	{
+		if (s1[i] != *(s2 + i))
+			return (0);
+	}
+
+	return (1);
+}
