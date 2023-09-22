@@ -39,7 +39,7 @@ int print_hex(va_list args, char *buf, int index)
  * Return: void
  */
 
-void hex_recursion(unsigned int j, char *arr, int last_index)
+void hex_recursion(unsigned long int j, char *arr, int last_index)
 {
 	char c;
 
@@ -91,7 +91,7 @@ int print_hex_upper(va_list args, char *buf, int index)
  * Return: void
  */
 
-void hex_upper_recursion(unsigned int j, char *arr, int last_index)
+void hex_upper_recursion(unsigned long int j, char *arr, int last_index)
 {
 	char c;
 

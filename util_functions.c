@@ -6,14 +6,14 @@
  * Return: string
  */
 
-char *int_to_str(int d)
+char *int_to_str(long int d)
 {
-	int i, j = 1, k = 1, l = 0, m = 0;
+	long int i, j = 1, k = 1, l = 0, m = 0;
 	char *s;
 
-	if (d < 0 && d != INT_MIN)
+	if (d < 0 && d != LONG_MIN)
 		d *= -1, l = 1;
-	if (d == INT_MIN)
+	if (d == LONG_MIN)
 		d += 1, d *= -1, l = 1, m = 1;
 	for (i = d; i > 9; i /= 10)
 		j *= 10, k++;
@@ -29,30 +29,6 @@ char *int_to_str(int d)
 	}
 	return (NULL);
 
-}
-
-
-/**
- * _atoi - converts str to int
- * @s: string
- * Return: int
- */
-
-int _atoi(const char *s)
-{
-	int i = 0, j = 1, k, l = 0, neg = 0;
-
-	if (s[0] == '-')
-		neg = 1;
-
-	for (; s[i]; i++)
-		j *= neg == 1 && i == 0 ? 1 : 10;
-	j /= 10;
-	for (k = neg; k < i; k++)
-		l += ((s[k] - 48) * j), j /= 10;
-
-	l *= neg == 1 ? -1 : 1;
-	return (l);
 }
 
 

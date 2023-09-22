@@ -40,7 +40,7 @@ int print_uint(va_list args, char *buf, int index)
  * Return: void
  */
 
-void uint_recursion(unsigned int j, char *arr, int last_index)
+void uint_recursion(unsigned long int j, char *arr, int last_index)
 {
 	char c;
 
@@ -92,7 +92,7 @@ int print_octal(va_list args, char *buf, int index)
  * Return: void
  */
 
-void octal_recursion(unsigned int j, char *arr, int last_index)
+void octal_recursion(unsigned long int j, char *arr, int last_index)
 {
 	char c;
 
