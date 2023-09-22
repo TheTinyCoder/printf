@@ -65,7 +65,7 @@ int _atoi(const char *s)
  * Return: 1 if strings are equal, 0 otherwise
  */
 
-int _strcmp(char *s1, const char *s2)
+int _strcmp(const char *s1, const char *s2)
 {
 	int i;
 

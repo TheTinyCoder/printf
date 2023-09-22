@@ -92,7 +92,7 @@ char *int_to_str(int);
 int _atoi(const char *);
 
 /* compare specifier string to input specifier */
-int _strcmp(char *s1, const char *s2);
+int _strcmp(const char *s1, const char *s2);
 
 /* finds length of string */
 int _strlen(char *s);
