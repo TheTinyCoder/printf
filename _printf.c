@@ -35,7 +35,11 @@ int _printf(const char *format, ...)
 			{
 				f = get_specifier_func(&format[i]);
 				if (f)
+				{
 					len += f(args, buf, index);
+					i += format[i] == ' ' || format[i] == '+' || format[i] == '#'
+						? 1 : 0;
+				}
 				else
 				{
 					use_buffer(buf, index, format[i - 1]), len++;
