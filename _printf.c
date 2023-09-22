@@ -11,10 +11,10 @@ int _printf(const char *format, ...)
 {
 	int i, index = 0, len = 0;
 	va_list args;
-	char *buf = malloc(sizeof(char) * BUF_SIZE), *s = "%", *t = "% ";
+	char *buf = malloc(sizeof(char) * BUF_SIZE), *s = "% ";
 	specifierFuncPtr funcPtr;
 
-	if (!format || !buf || _strcmp(&format[0], s) || _strcmp(&format[0], t))
+	if (!format || !buf || (*format == '%' && (!format[1] || _strcmp(format, s))))
 	{
 		free(buf);
 		return (-1);

@@ -23,7 +23,7 @@ int main(void)
 	_printf("\n");
 	_printf("Could you print some non-printable characters?\n%S\nThanks!\n", "Sure:\x1F\x7F\n");
 	_printf("\n");
-	_printf("");
+	_printf("->%d", _printf(""));
 	_printf("\n");
 	_printf("- What did you say?\n- %S\n- That's what I thought.\n", "");
 	_printf("\n");
