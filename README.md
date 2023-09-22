@@ -58,6 +58,29 @@ A custom printf function
 
 #### Address: %p
 
+   - Prints an address of a pointer:
+       - casts pointer value to `uintptr_t`, then saves it in `unsigned long int`
+       - then converts to hexadecimal and prints with prefix `0x`
+
+### Flags
+
+#### Plus, Space and Hash(number sign): + , \s and #
+
+   - Plus sign, `+`:
+       - prints a plus sign preceding positive values
+       - example: `_printf("%+d", 1024)` prints `+1024`
+       - prints a minus sign preceding negative values
+       - example: `_printf("%+d", -1024)` prints `-1024`
+
+   - Space, `' '`:
+       - prints a space before a positive value not printed with the `+` flag
+       - example: `_printf("% d", 1024)` prints ` 1024`
+
+   - Hash (number sign), `#`:
+       - prints prefix `0` to the output value when used with the **octal** conversion character `o`
+       - example: `_printf("%#o", 1024)` prints `02000`
+       - prints prefix `0x` to the output value when used with the **hexadecimal** conversion character `x`
+       - example: `_printf("%#x", 1024)` prints `0x400`
 
 ## More Information
 
