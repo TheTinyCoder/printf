@@ -27,9 +27,9 @@ int _printf(const char *format, ...)
 			i++;
 			if (format[i] == '%')
 				use_buffer(buf, index, format[i]), len++;
-			else if (!format[i])
-				continue;
-			else
+			else if (i == 1 && (format[i] == 'l' || format[i] == 'h') && !format[i + 1])
+				len = -1;
+			else if (format[i])
 			{
 				funcPtr = get_specifier_func(&format[i]);
 				if (funcPtr)
