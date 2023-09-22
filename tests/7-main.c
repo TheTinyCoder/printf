@@ -67,7 +67,10 @@ int main(void)
 	_printf("%#X\n", UINT_MAX);
 	_printf("% ");
 	_printf("\n");
-	_printf("% % % % ");
+	_printf("->%d", _printf("% % % % "));
+	printf("->(%d)", printf("% % % % "));
+	_printf("->%d", _printf("% "));
+	printf("->(%d)", printf("% "));
 	_printf("\n");
 
 

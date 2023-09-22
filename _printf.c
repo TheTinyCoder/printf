@@ -14,7 +14,7 @@ int _printf(const char *format, ...)
 	char *buf = malloc(sizeof(char) * BUF_SIZE);
 	specifierFuncPtr funcPtr;
 
-	if (!format || !buf || (format[0] == '%' && !format[1]))
+	if (!format || !buf || (format[0] == '%' && (!format[1] || format[1] == ' ')))
 	{
 		free(buf);
 		return (-1);

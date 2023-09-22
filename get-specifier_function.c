@@ -49,7 +49,7 @@ specifier_funcs *get_specifier_func(const char *c)
  * Return: number of bytes printed
  */
 
-int print_percent(__attribute__((unused))va_list args__attribute, char *buf, int index)
+int print_percent(__attribute__((unused))va_list args, char *buf, int index)
 {
 	use_buffer(buf, index, '%');
 	return (1);
