@@ -17,7 +17,7 @@ specifier_funcs *get_specifier_func(const char *c)
 		{"X", print_hex_upper}, {"S", print_custom_str},
 		{"p", print_address}, {"+d", print_decimal_plus},
 		{"+i", print_integer_plus}, {" d", print_decimal_space},
-		{" i", print_integer_space}, {" +d", print_integer_plus},
+		{" i", print_integer_space}, {" +d", print_decimal_plus},
 		{" +i", print_integer_plus}, {"#x", print_hash_hex},
 		{"#X", print_hash_hex_upper}, {"#o", print_hash_octal},
 		{NULL, NULL}
