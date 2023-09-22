@@ -60,7 +60,18 @@ int print_custom_str(va_list, char *, int);
 int print_address(va_list, char *, int);
 void address_to_hex(unsigned long int, char *, int);
 
+/* print plus decimal & integers(other bases to decimal): "+d" & "+i" */
+int print_decimal_plus(va_list, char *, int);
+int print_integer_plus(va_list, char *, int);
 
+/* print space decimal & integers(other bases to decimal): " d" & " i" */
+int print_decimal_space(va_list, char *, int);
+int print_integer_space(va_list, char *, int);
+
+/* print hash hex and octal: "#x", "#X" & "#o" */
+int print_hash_hex(va_list, char *, int);
+int print_hash_hex_upper(va_list, char *, int);
+int print_hash_octal(va_list, char *, int);
 
 
 
@@ -72,6 +83,9 @@ char *int_to_str(int);
 
 /* string to integer conversion */
 int _atoi(const char *);
+
+/* compare specifier string to input specifier */
+int _strcmp(char *s1, const char *s2);
 
 /* hex to decimal conversion */
 char *hex_to_decimal(const char *);
