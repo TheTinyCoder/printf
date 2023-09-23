@@ -57,3 +57,26 @@ int print_percent(__attribute__((unused))va_list args, char *buf, int index)
 	use_buffer(buf, index, '%');
 	return (1);
 }
+
+
+/**
+ * _strchr -  function entry-point
+ *
+ * Description: 'locates a character in a string'
+ * @c: character
+ * Return: 1 if found, 0 otherwise
+ */
+
+int _strchr(char c)
+{
+	unsigned int i = 0;
+	char s[] = {' ', '+', 'h', 'l', '#'};
+
+	for (; s[i]; i++)
+	{
+		if (s[i] == c)
+			return (1);
+	}
+	return (0);
+}
+

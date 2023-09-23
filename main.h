@@ -116,6 +116,9 @@ int _strcmp(const char *s1, const char *s2);
 /* finds length of string */
 int _strlen(char *s);
 
+/* checks if character after '%' is a flag or modifier */
+int _strchr(char c);
+
 /* hex to decimal conversion */
 char *hex_to_decimal(const char *);
 
