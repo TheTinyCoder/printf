@@ -9,7 +9,7 @@
 
 identifiers *get_identifiers(va_list args, const char *c)
 {
-	int i = 0, j = 0, k = 0, width = 0;
+	int i = 0, j = 0, k = 0, width = 0, precision = 0;
 	identifierPtr ptr = malloc(sizeof(identifiers));
 	specifierFuncPtr funcPtr;
 	char flags[5] = {'\0', '\0', '\0', '\0', '\0'};
@@ -24,14 +24,14 @@ identifiers *get_identifiers(va_list args, const char *c)
 			k *= 10, k += c[i] - 48, i++;
 		if (c[i] == '*' && !ptr->period)
 			ptr->width = va_arg(args, int), width = 1, i++;
-		else if (c[i] == '*' && ptr->period)
-			ptr->precision = va_arg(args, int), i++;
-		if (!ptr->period && width == 0)
-			ptr->width = k, k = 0, width = 1;
 		if (c[i] == '.')
 			ptr->period = 1, i++;
-		if (ptr->period)
-			ptr->precision = k, k = 0;
+		if (c[i] == '*' && ptr->period)
+			ptr->precision = va_arg(args, int), precision = 1, i++;
+		if (!ptr->period && width == 0)
+			ptr->width = k, k = 0, width = 1;
+		if (ptr->period && precision == 0)
+			ptr->precision = k, k = 0, precision = 1;
 		if (!(c[i] > 47 && c[i] < 58))
 		{
 			funcPtr = get_specifier_func(&c[i]), ptr->ptr = funcPtr;
