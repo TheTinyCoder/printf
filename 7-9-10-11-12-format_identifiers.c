@@ -19,15 +19,21 @@ identifiers *get_identifiers(va_list args, const char *c)
 	{
 		if ((c[i] == '+' || c[i] == ' ' || c[i] == '-' ||
 					c[i] == '0' || c[i] == '#') && j < 5)
-			flags[j] = c[i], j++, i++;
-		if (c[i] > 47 && c[i] < 58)
-			k *= 10, k += c[i] - 48, i++;
+		{
+			flags[j] = c[i], j++;
+			continue;
+		}
 		if (c[i] == '*' && !ptr->period)
 			ptr->width = va_arg(args, int), width = 1, i++;
 		if (c[i] == '.')
 			ptr->period = 1, i++;
 		if (c[i] == '*' && ptr->period)
 			ptr->precision = va_arg(args, int), precision = 1, i++;
+		if (c[i] > 47 && c[i] < 58)
+		{
+			k *= 10, k += c[i] - 48;
+			continue;
+		}
 		if (!ptr->period && width == 0)
 			ptr->width = k, k = 0, width = 1;
 		if (ptr->period && precision == 0)

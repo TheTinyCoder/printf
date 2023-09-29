@@ -23,7 +23,7 @@ int print_uint(va_list args, char *buf, int index, identifierPtr ptr)
 		left = 1;
 	for (p = n; p > 0; p /= 10)
 		i++;
-	precision = ptr->precision - i, x = i == 0 ? 1 : 0;
+	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
 	if (left == 0 && ptr->period == 0)
 	{
 		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
@@ -94,7 +94,7 @@ int print_octal(va_list args, char *buf, int index, identifierPtr ptr)
 		left = 1;
 	for (p = n; p > 0; p /= 8)
 		i++;
-	precision = ptr->precision - i, x = i == 0 ? 1 : 0;
+	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
 	if (left == 0 && ptr->period == 0)
 	{
 		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
