@@ -15,10 +15,6 @@ int print_long_uint(va_list args, char *buf, int index, identifierPtr ptr)
 	unsigned long int n = va_arg(args, long int), p;
 	char *y;
 
-	if (_strchr(ptr->flags, '+'))
-		index = use_buffer(buf, index, '+'), k++;
-	else if (_strchr(ptr->flags, ' '))
-		index = use_buffer(buf, index, ' '), k++;
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 10)
 		i++;
@@ -29,12 +25,16 @@ int print_long_uint(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
 	}
-	else if (precision > 0)
+	if (_strchr(ptr->flags, '+'))
+		index = use_buffer(buf, index, '+'), k++;
+	else if (_strchr(ptr->flags, ' '))
+		index = use_buffer(buf, index, ' '), k++;
+	if (precision > 0)
 	{
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
-	else if (n == 0 && precision == 0 && ptr->period)
+	else if (n == 0 && precision <= 0 && ptr->period)
 		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
@@ -68,10 +68,6 @@ int print_long_octal(va_list args, char *buf, int index, identifierPtr ptr)
 	unsigned long int n = va_arg(args, long int), p;
 	char *y;
 
-	if (_strchr(ptr->flags, '+'))
-		index = use_buffer(buf, index, '+'), k++;
-	else if (_strchr(ptr->flags, ' '))
-		index = use_buffer(buf, index, ' '), k++;
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 8)
 		i++;
@@ -82,12 +78,16 @@ int print_long_octal(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
 	}
-	else if (precision > 0)
+	if (_strchr(ptr->flags, '+'))
+		index = use_buffer(buf, index, '+'), k++;
+	else if (_strchr(ptr->flags, ' '))
+		index = use_buffer(buf, index, ' '), k++;
+	if (precision > 0)
 	{
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
-	else if (n == 0 && precision == 0 && ptr->period)
+	else if (n == 0 && precision <= 0 && ptr->period)
 		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
@@ -121,10 +121,6 @@ int print_short_uint(va_list args, char *buf, int index, identifierPtr ptr)
 	unsigned short int n = va_arg(args, int), p;
 	char *y;
 
-	if (_strchr(ptr->flags, '+'))
-		index = use_buffer(buf, index, '+'), k++;
-	else if (_strchr(ptr->flags, ' '))
-		index = use_buffer(buf, index, ' '), k++;
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 10)
 		i++;
@@ -135,12 +131,16 @@ int print_short_uint(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
 	}
-	else if (precision > 0)
+	if (_strchr(ptr->flags, '+'))
+		index = use_buffer(buf, index, '+'), k++;
+	else if (_strchr(ptr->flags, ' '))
+		index = use_buffer(buf, index, ' '), k++;
+	if (precision > 0)
 	{
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
-	else if (n == 0 && precision == 0 && ptr->period)
+	else if (n == 0 && precision <= 0 && ptr->period)
 		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
@@ -175,10 +175,6 @@ int print_short_octal(va_list args, char *buf, int index, identifierPtr ptr)
 	char *y;
 
 
-	if (_strchr(ptr->flags, '+'))
-		index = use_buffer(buf, index, '+'), k++;
-	else if (_strchr(ptr->flags, ' '))
-		index = use_buffer(buf, index, ' '), k++;
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 8)
 		i++;
@@ -189,12 +185,16 @@ int print_short_octal(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
 	}
-	else if (precision > 0)
+	if (_strchr(ptr->flags, '+'))
+		index = use_buffer(buf, index, '+'), k++;
+	else if (_strchr(ptr->flags, ' '))
+		index = use_buffer(buf, index, ' '), k++;
+	if (precision > 0)
 	{
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
-	else if (n == 0 && precision == 0 && ptr->period)
+	else if (n == 0 && precision <= 0 && ptr->period)
 		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
@@ -211,4 +211,3 @@ int print_short_octal(va_list args, char *buf, int index, identifierPtr ptr)
 	} free(y);
 	return (i + x + k);
 }
-

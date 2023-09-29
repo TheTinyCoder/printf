@@ -15,12 +15,7 @@ int print_uint(va_list args, char *buf, int index, identifierPtr ptr)
 	unsigned int n = va_arg(args, int), p;
 	char *y;
 
-	if (_strchr(ptr->flags, '+'))
-		index = use_buffer(buf, index, '+'), k++;
-	else if (_strchr(ptr->flags, ' '))
-		index = use_buffer(buf, index, ' '), k++;
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 10)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -30,11 +25,17 @@ int print_uint(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
 	}
-	else if (precision > 0)
+	if (_strchr(ptr->flags, '+'))
+		index = use_buffer(buf, index, '+'), k++;
+	else if (_strchr(ptr->flags, ' '))
+		index = use_buffer(buf, index, ' '), k++;
+	if (precision > 0)
 	{
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
+	else if (n == 0 && precision <= 0 && ptr->period)
+		return (0);
 	y = malloc(sizeof(char) * (i + x + 1)), y[i + x] = '\0';
 	if (n)
 		uint_recursion(n, y, (i - 1));
@@ -88,10 +89,7 @@ int print_octal(va_list args, char *buf, int index, identifierPtr ptr)
 	unsigned int n = va_arg(args, int), p;
 	char *y;
 
-	if (_strchr(ptr->flags, '#'))
-		index = use_buffer(buf, index, '0'), k++;
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 8)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -101,11 +99,15 @@ int print_octal(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
 	}
-	else if (precision > 0)
+	if (_strchr(ptr->flags, '#'))
+		index = use_buffer(buf, index, '0'), k++;
+	if (precision > 0)
 	{
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
+	else if (n == 0 && precision <= 0 && ptr->period)
+		return (0);
 	y = malloc(sizeof(char) * (i + x + 1)), y[i + x] = '\0';
 	if (n)
 		octal_recursion(n, y, (i - 1));

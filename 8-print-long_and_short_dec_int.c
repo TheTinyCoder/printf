@@ -16,12 +16,7 @@ int print_long_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 
 	if (d)
 	{
-		if (_strchr(ptr->flags, '+') && d[0] != '-')
-			index = use_buffer(buf, index, '+'), k++;
-		else if (_strchr(ptr->flags, ' ') && d[0] != '-')
-			index = use_buffer(buf, index, ' '), k++;
-		if (_strchr(ptr->flags, '-'))
-			left = 1;
+		left = _strchr(ptr->flags, '-') ? 1 : 0;
 		j = d[0] == '-' ? 1 : 0;
 		precision = ptr->precision - (_strlen(d) - j);
 		if (left == 0 && ptr->period == 0)
@@ -30,14 +25,18 @@ int print_long_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		}
-		else if (precision > 0)
+		if (_strchr(ptr->flags, '+') && d[0] != '-')
+			index = use_buffer(buf, index, '+'), k++;
+		else if (_strchr(ptr->flags, ' ') && d[0] != '-')
+			index = use_buffer(buf, index, ' '), k++;
+		if (precision > 0)
 		{
 			if (d[0] == '-')
 				index = use_buffer(buf, index, d[0]), i++;
 			for (j = 0; j < precision; j++)
 				index = use_buffer(buf, index, '0'), k++;
 		}
-		else if (*d == 0 && precision == 0 && ptr->period)
+		else if (*d == 0 && precision <= 0 && ptr->period)
 			return (0);
 		for (; d[i]; i++)
 			index = use_buffer(buf, index, d[i]);
@@ -69,12 +68,7 @@ int print_long_integer(va_list args, char *buf, int index, identifierPtr ptr)
 
 	if (y)
 	{
-		if (_strchr(ptr->flags, '+') && y[0] != '-')
-			index = use_buffer(buf, index, '+'), k++;
-		else if (_strchr(ptr->flags, ' ') && y[0] != '-')
-			index = use_buffer(buf, index, ' '), k++;
-		if (_strchr(ptr->flags, '-'))
-			left = 1;
+		left = _strchr(ptr->flags, '-') ? 1 : 0;
 		j = y[0] == '-' ? 1 : 0;
 		precision = ptr->precision - (_strlen(y) - j);
 		if (left == 0 && ptr->period == 0)
@@ -83,14 +77,18 @@ int print_long_integer(va_list args, char *buf, int index, identifierPtr ptr)
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		}
-		else if (precision > 0)
+		if (_strchr(ptr->flags, '+') && y[0] != '-')
+			index = use_buffer(buf, index, '+'), k++;
+		else if (_strchr(ptr->flags, ' ') && y[0] != '-')
+			index = use_buffer(buf, index, ' '), k++;
+		if (precision > 0)
 		{
 			if (y[0] == '-')
 				index = use_buffer(buf, index, y[0]), d++;
 			for (j = 0; j < precision; j++)
 				index = use_buffer(buf, index, '0'), k++;
 		}
-		else if (*y == 0 && precision == 0 && ptr->period)
+		else if (*y == 0 && precision <= 0 && ptr->period)
 			return (0);
 		for (; y[d]; d++)
 			index = use_buffer(buf, index, y[d]);
@@ -122,12 +120,7 @@ int print_short_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 
 	if (d)
 	{
-		if (_strchr(ptr->flags, '+') && d[0] != '-')
-			index = use_buffer(buf, index, '+'), k++;
-		else if (_strchr(ptr->flags, ' ') && d[0] != '-')
-			index = use_buffer(buf, index, ' '), k++;
-		if (_strchr(ptr->flags, '-'))
-			left = 1;
+		left = _strchr(ptr->flags, '-') ? 1 : 0;
 		precision = ptr->precision - (_strlen(d) - i);
 		if (left == 0 && ptr->period == 0)
 		{
@@ -135,14 +128,18 @@ int print_short_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		}
-		else if (precision > 0)
+		if (_strchr(ptr->flags, '+') && d[0] != '-')
+			index = use_buffer(buf, index, '+'), k++;
+		else if (_strchr(ptr->flags, ' ') && d[0] != '-')
+			index = use_buffer(buf, index, ' '), k++;
+		if (precision > 0)
 		{
 			if (d[0] == '-')
 				index = use_buffer(buf, index, d[0]), i++;
 			for (j = 0; j < precision; j++)
 				index = use_buffer(buf, index, '0'), k++;
 		}
-		else if (*d == 0 && precision == 0 && ptr->period)
+		else if (*d == 0 && precision <= 0 && ptr->period)
 			return (0);
 		for (; d[i]; i++)
 			index = use_buffer(buf, index, d[i]);
@@ -174,12 +171,7 @@ int print_short_integer(va_list args, char *buf, int index, identifierPtr ptr)
 
 	if (y)
 	{
-		if (_strchr(ptr->flags, '+') && y[0] != '-')
-			index = use_buffer(buf, index, '+'), k++;
-		else if (_strchr(ptr->flags, ' ') && y[0] != '-')
-			index = use_buffer(buf, index, ' '), k++;
-		if (_strchr(ptr->flags, '-'))
-			left = 1;
+		left = _strchr(ptr->flags, '-') ? 1 : 0;
 		precision = ptr->precision - (_strlen(y) - d);
 		if (left == 0 && ptr->period == 0)
 		{
@@ -187,14 +179,18 @@ int print_short_integer(va_list args, char *buf, int index, identifierPtr ptr)
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		}
-		else if (precision > 0)
+		if (_strchr(ptr->flags, '+') && y[0] != '-')
+			index = use_buffer(buf, index, '+'), k++;
+		else if (_strchr(ptr->flags, ' ') && y[0] != '-')
+			index = use_buffer(buf, index, ' '), k++;
+		if (precision > 0)
 		{
 			if (y[0] == '-')
 				index = use_buffer(buf, index, y[0]), d++;
 			for (j = 0; j < precision; j++)
 				index = use_buffer(buf, index, '0'), k++;
 		}
-		else if (*y == 0 && precision == 0 && ptr->period)
+		else if (*y == 0 && precision <= 0 && ptr->period)
 			return (0);
 		for (; y[d]; d++)
 			index = use_buffer(buf, index, y[d]);
