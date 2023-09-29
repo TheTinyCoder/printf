@@ -71,3 +71,28 @@ int _strlen(char *s)
 		x++;
 	return (x);
 }
+
+
+/**
+ * _strchr -  function entry-point
+ *
+ * Description: 'locates a character in a string'
+ * @s: string
+ * @c: character
+ * Return: 1 if found, 0 otherwise
+ */
+
+int _strchr(char *s, char c)
+{
+	unsigned int i = 0;
+
+	if (s)
+	{
+		for (; s[i]; i++)
+		{
+			if (s[i] == c)
+				return (1);
+		}
+	}
+	return (0);
+}

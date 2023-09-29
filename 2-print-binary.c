@@ -5,15 +5,17 @@
  * @args: va_list
  * @buf: buffer
  * @index: buffer index
+ * @ptr: pointer to format identifiers
  * Return: number of bytes printed
  */
 
-int print_binary(va_list args, char *buf, int index)
+int print_binary(va_list args, char *buf, int index, identifierPtr ptr)
 {
 	int i = 0;
 	unsigned int j = va_arg(args, int), k;
 	char x = '0', *y;
 
+	(void)ptr;
 	if (j)
 	{
 		for (k = j; k > 0; k /= 2)

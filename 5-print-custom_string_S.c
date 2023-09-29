@@ -5,14 +5,16 @@
  * @args: va_list
  * @buf: buffer
  * @index: buffer index
+ * @ptr: pointer to format identifiers
  * Return: number of bytes printed
  */
 
-int print_custom_str(va_list args, char *buf, int index)
+int print_custom_str(va_list args, char *buf, int index, identifierPtr ptr)
 {
 	int i = 0, j, k = 0;
 	char *x = "(null)", *s = va_arg(args, char *), y[2];
 
+	(void)ptr;
 	if (s)
 	{
 		for (; s[i]; i++)

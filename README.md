@@ -84,6 +84,16 @@ A custom printf function
        - prints prefix `0x` to the output value when used with the **hexadecimal** conversion character `x`
        - example: `_printf("%#x", 1024)` prints `0x400`
 
+### Modifiers
+
+#### Length modifiers: l & h
+
+   - Handles length for `d`, `i`, `u`, `o`, `x` and `X`:
+       - `ld`, `li`, `lu`, `lo`, `lx`, `lX`, `hd`, `hi`, `hu`, `ho`, `hx` & `hX`
+   - Long uses `LONG_MIN` to `LONG_MAX` for `d` and `i` and `ULONG_MIN` to `ULONG_MAX` for `u`, `o`, `x` & `X`
+   - Short uses `SHRT_MIN` to `SHRT_MAX` for `d` and `i` and `USHRT_MIN` to `USHRT_MAX` for `u`, `o`, `x` & `X`
+
+#### Width modifiers:
 ## More Information
 
    - Uses a local buffer of 1024 chars and calls write only when buffer is filled

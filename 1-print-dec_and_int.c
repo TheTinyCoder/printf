@@ -5,33 +5,48 @@
  * @args: va_list
  * @buf: buffer
  * @index: buffer index
+ * @ptr: pointer to format identifiers
  * Return: number of bytes printed
  */
 
-int print_decimal(va_list args, char *buf, int index)
+int print_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 {
-	int i = 0, j = 0;
+	int i = 0, j = 0, k = 0, l, left = 0, precision;
 	char x = '0', *d = int_to_str(va_arg(args, int));
 
 	if (d)
 	{
-		if (d[0] == 48 && d[1])
+		if (_strchr(ptr->flags, '+') && d[0] != '-')
+			index = use_buffer(buf, index, '+'), k++;
+		else if (_strchr(ptr->flags, ' ') && d[0] != '-')
+			index = use_buffer(buf, index, ' '), k++;
+		if (_strchr(ptr->flags, '-'))
+			left = 1;
+		if (d[0] == '-')
+			index = use_buffer(buf, index, d[0]), i++;
+		precision = ptr->precision - (_strlen(d) - i);
+		if (left == 0 && ptr->period == 0 && _strchr(ptr->flags, '0'))
 		{
-			j = d[1] == 'x' || d[1] == 'b' ? 2 : 1;
-			for (; d[j]; j++)
-				index = use_buffer(buf, index, d[j]), i++;
-
+			l = ptr->width - (_strlen(d) + k);
+			for (j = 0; j < l; j++)
+				index = use_buffer(buf, index, '0'), k++;
 		}
-		else
+		else if (precision > 0)
 		{
-			for (; d[i]; i++)
-				index = use_buffer(buf, index, d[i]);
-
+			for (j = 0; j < precision; j++)
+				index = use_buffer(buf, index, '0'), k++;
+		}
+		for (; d[i]; i++)
+			index = use_buffer(buf, index, d[i]);
+		if (left == 1)
+		{
+			l = ptr->width - (i + k);
+			for (j = 0; j < l; j++)
+				index = use_buffer(buf, index, ' '), k++;
 		}
 		free(d);
-		return (i);
-	}
-	use_buffer(buf, index, x);
+		return (i + k);
+	} use_buffer(buf, index, x);
 	return (1);
 }
 
@@ -41,41 +56,48 @@ int print_decimal(va_list args, char *buf, int index)
  * @args: va_list
  * @buf: buffer
  * @index: buffer index
+ * @ptr: pointer to format identifiers
  * Return: number of bytes printed
  */
 
-int print_integer(va_list args, char *buf, int index)
+int print_integer(va_list args, char *buf, int index, identifierPtr ptr)
 {
-	int d = 0;
-	char x = '0', *y = int_to_str(va_arg(args, int)), *z;
+	int d = 0, j = 0, k = 0, l, left = 0, precision;
+	char x = '0', *y = int_to_str(va_arg(args, int));
 
 	if (y)
 	{
-		if (y[0] == 48 && y[1])
+		if (_strchr(ptr->flags, '+') && y[0] != '-')
+			index = use_buffer(buf, index, '+'), k++;
+		else if (_strchr(ptr->flags, ' ') && y[0] != '-')
+			index = use_buffer(buf, index, ' '), k++;
+		if (_strchr(ptr->flags, '-'))
+			left = 1;
+		if (y[0] == '-')
+			index = use_buffer(buf, index, y[0]), d++;
+		precision = ptr->precision - (_strlen(y) - d);
+		if (left == 0 && ptr->period == 0 && _strchr(ptr->flags, '0'))
 		{
-			switch (y[1])
-			{
-				case 'x':
-					z = hex_to_decimal(y);
-					break;
-				case 'b':
-					z = binary_to_decimal(y);
-					break;
-				default:
-					z = octal_to_decimal(y);
-			}
-			for (; z[d]; d++)
-				index = use_buffer(buf, index, z[d]);
-			free(z);
+			l = ptr->width - (_strlen(y) + k);
+			for (j = 0; j < l; j++)
+				index = use_buffer(buf, index, '0'), k++;
+		}
+		else if (precision > 0)
+		{
+			for (j = 0; j < precision; j++)
+				index = use_buffer(buf, index, '0'), k++;
+		}
 
-		}
-		else
+		for (; y[d]; d++)
+			index = use_buffer(buf, index, y[d]);
+		if (left == 1)
 		{
-			for (; y[d]; d++)
-				index = use_buffer(buf, index, y[d]);
-			free(y);
+			l = ptr->width - (d + k);
+			for (j = 0; j < l; j++)
+				index = use_buffer(buf, index, ' '), k++;
 		}
-		return (d);
+		free(y);
+		return (d + k);
 	}
 	use_buffer(buf, index, x);
 	return (1);

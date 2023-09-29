@@ -5,15 +5,17 @@
  * @args: va_list
  * @buf: buffer
  * @index: buffer index
+ * @ptr: pointer to format identifiers
  * Return: number of bytes printed
  */
 
-int print_address(va_list args, char *buf, int index)
+int print_address(va_list args, char *buf, int index, identifierPtr ptr)
 {
 	int i = 0;
 	unsigned long int j = (uintptr_t)(va_arg(args, void *)), k;
 	char *x = "(nil)", *y;
 
+	(void)ptr;
 	if (j)
 	{
 		for (k = j; k > 0; k /= 16)

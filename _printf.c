@@ -11,11 +11,13 @@
 
 int check_conditions(const char *s)
 {
+	char t[] = {' ', '+', 'h', 'l', '#'};
+
 	if (*s == '%')
 	{
 		if (!s[1])
 			return (1);
-		if (_strchr(s[1]) && !s[2])
+		if (_strchr(t, s[1]) && !s[2])
 			return (1);
 	}
 	return (0);
@@ -30,10 +32,10 @@ int check_conditions(const char *s)
 
 int _printf(const char *format, ...)
 {
-	int i, index = 0, len = 0;
+	int i, index = 0, len = 0, n = sizeof(char);
 	va_list args;
-	char *buf = malloc(sizeof(char) * BUF_SIZE);
-	specifierFuncPtr funcPtr;
+	char *buf = malloc(n * BUF_SIZE), s[] = {' ', '+', 'h', 'l', '#'}, x;
+	identifierPtr idPtr;
 
 	if (!format || !buf || check_conditions(format))
 	{
@@ -49,16 +51,16 @@ int _printf(const char *format, ...)
 				use_buffer(buf, index, format[i]), len++;
 			else
 			{
-					funcPtr = get_specifier_func(&format[i]);
-				if (funcPtr)
+				idPtr = get_identifiers(args, &format[i]), x = format[i];
+				if (idPtr && idPtr->ptr)
 				{
-					len += funcPtr->f(args, buf, index);
-					i += _strlen(funcPtr->specifier) - 1, free(funcPtr);
+					len += idPtr->ptr->f(args, buf, index, idPtr);
+					i += idPtr->n - 1, free(idPtr->ptr), free(idPtr);
 				}
-				else if (!_strchr(format[i]) || (_strchr(format[i]) && format[i + 1]))
+				else if (!_strchr(s, x) || (_strchr(s, x) && format[i + 1]))
 				{
 					index = use_buffer(buf, index, format[i - 1]), len++;
-					if (!_strchr(format[i]))
+					if (!_strchr(s, format[i]))
 						use_buffer(buf, index, format[i]), len++;
 				}
 			}
