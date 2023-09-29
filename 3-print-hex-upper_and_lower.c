@@ -27,11 +27,11 @@ int print_hex(va_list args, char *buf, int index, identifierPtr ptr)
 		for (p = n; p > 0; p /= 16)
 			i++;
 		precision = ptr->precision - i;
-		if (left == 0 && ptr->period == 0 && _strchr(ptr->flags, '0'))
+		if (left == 0 && ptr->period == 0)
 		{
 			l = ptr->width - (i + k);
 			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, '0'), k++;
+				index = use_buffer(buf, index, ' '), k++;
 		}
 		else if (precision > 0)
 		{
@@ -102,11 +102,11 @@ int print_hex_upper(va_list args, char *buf, int index, identifierPtr ptr)
 		for (p = n; p > 0; p /= 16)
 			i++;
 		precision = ptr->precision - i;
-		if (left == 0 && !ptr->period && _strchr(ptr->flags, '0'))
+		if (left == 0 && !ptr->period)
 		{
 			l = ptr->width - (i + k);
 			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, '0'), k++;
+				index = use_buffer(buf, index, ' '), k++;
 		}
 		else if (precision > 0)
 		{
