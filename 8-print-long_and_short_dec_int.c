@@ -37,6 +37,8 @@ int print_long_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 			for (j = 0; j < precision; j++)
 				index = use_buffer(buf, index, '0'), k++;
 		}
+		else if (*d == 0 && precision == 0 && ptr->period)
+			return (0);
 		for (; d[i]; i++)
 			index = use_buffer(buf, index, d[i]);
 		if (left == 1)
@@ -44,11 +46,9 @@ int print_long_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 			l = ptr->width - (i + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
-		}
-		free(d);
+		} free(d);
 		return (i + k);
-	}
-	use_buffer(buf, index, x);
+	} use_buffer(buf, index, x);
 	return (1);
 }
 
@@ -90,6 +90,8 @@ int print_long_integer(va_list args, char *buf, int index, identifierPtr ptr)
 			for (j = 0; j < precision; j++)
 				index = use_buffer(buf, index, '0'), k++;
 		}
+		else if (*y == 0 && precision == 0 && ptr->period)
+			return (0);
 		for (; y[d]; d++)
 			index = use_buffer(buf, index, y[d]);
 		if (left == 1)
@@ -97,11 +99,9 @@ int print_long_integer(va_list args, char *buf, int index, identifierPtr ptr)
 			l = ptr->width - (d + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
-		}
-		free(y);
+		} free(y);
 		return (d + k);
-	}
-	use_buffer(buf, index, x);
+	} use_buffer(buf, index, x);
 	return (1);
 }
 
@@ -142,6 +142,8 @@ int print_short_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 			for (j = 0; j < precision; j++)
 				index = use_buffer(buf, index, '0'), k++;
 		}
+		else if (*d == 0 && precision == 0 && ptr->period)
+			return (0);
 		for (; d[i]; i++)
 			index = use_buffer(buf, index, d[i]);
 		if (left == 1)
@@ -149,11 +151,9 @@ int print_short_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 			l = ptr->width - (i + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
-		}
-		free(d);
+		} free(d);
 		return (i + k);
-	}
-	use_buffer(buf, index, x);
+	} use_buffer(buf, index, x);
 	return (1);
 }
 
@@ -194,6 +194,8 @@ int print_short_integer(va_list args, char *buf, int index, identifierPtr ptr)
 			for (j = 0; j < precision; j++)
 				index = use_buffer(buf, index, '0'), k++;
 		}
+		else if (*y == 0 && precision == 0 && ptr->period)
+			return (0);
 		for (; y[d]; d++)
 			index = use_buffer(buf, index, y[d]);
 		if (left == 1)
@@ -201,10 +203,8 @@ int print_short_integer(va_list args, char *buf, int index, identifierPtr ptr)
 			l = ptr->width - (d + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
-		}
-		free(y);
+		} free(y);
 		return (d + k);
-	}
-	use_buffer(buf, index, x);
+	} use_buffer(buf, index, x);
 	return (1);
 }

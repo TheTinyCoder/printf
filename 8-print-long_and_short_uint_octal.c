@@ -19,8 +19,7 @@ int print_long_uint(va_list args, char *buf, int index, identifierPtr ptr)
 		index = use_buffer(buf, index, '+'), k++;
 	else if (_strchr(ptr->flags, ' '))
 		index = use_buffer(buf, index, ' '), k++;
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 10)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -35,6 +34,8 @@ int print_long_uint(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
+	else if (n == 0 && precision == 0 && ptr->period)
+		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
 		uint_recursion(n, y, (i - 1));
@@ -71,8 +72,7 @@ int print_long_octal(va_list args, char *buf, int index, identifierPtr ptr)
 		index = use_buffer(buf, index, '+'), k++;
 	else if (_strchr(ptr->flags, ' '))
 		index = use_buffer(buf, index, ' '), k++;
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 8)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -87,6 +87,8 @@ int print_long_octal(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
+	else if (n == 0 && precision == 0 && ptr->period)
+		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
 		octal_recursion(n, y, (i - 1));
@@ -123,8 +125,7 @@ int print_short_uint(va_list args, char *buf, int index, identifierPtr ptr)
 		index = use_buffer(buf, index, '+'), k++;
 	else if (_strchr(ptr->flags, ' '))
 		index = use_buffer(buf, index, ' '), k++;
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 10)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -139,6 +140,8 @@ int print_short_uint(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
+	else if (n == 0 && precision == 0 && ptr->period)
+		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
 		uint_recursion(n, y, (i - 1));
@@ -176,8 +179,7 @@ int print_short_octal(va_list args, char *buf, int index, identifierPtr ptr)
 		index = use_buffer(buf, index, '+'), k++;
 	else if (_strchr(ptr->flags, ' '))
 		index = use_buffer(buf, index, ' '), k++;
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 8)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -192,6 +194,8 @@ int print_short_octal(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
+	else if (n == 0 && precision == 0 && ptr->period)
+		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
 		octal_recursion(n, y, (i - 1));

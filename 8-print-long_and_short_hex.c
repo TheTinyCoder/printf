@@ -20,8 +20,7 @@ int print_long_hex(va_list args, char *buf, int index, identifierPtr ptr)
 		index = use_buffer(buf, index, '0'), k++;
 		index = use_buffer(buf, index, 'x'), k++;
 	}
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 16)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -36,6 +35,8 @@ int print_long_hex(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
+	else if (n == 0 && precision == 0 && ptr->period)
+		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
 		hex_recursion(n, y, (i - 1));
@@ -73,8 +74,7 @@ int print_long_hex_upper(va_list args, char *buf, int index, identifierPtr ptr)
 		index = use_buffer(buf, index, '0'), k++;
 		index = use_buffer(buf, index, 'X'), k++;
 	}
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 16)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -89,6 +89,8 @@ int print_long_hex_upper(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
+	else if (n == 0 && precision == 0 && ptr->period)
+		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
 		hex_upper_recursion(n, y, (i - 1));
@@ -126,8 +128,7 @@ int print_short_hex(va_list args, char *buf, int index, identifierPtr ptr)
 		index = use_buffer(buf, index, '0'), k++;
 		index = use_buffer(buf, index, 'x'), k++;
 	}
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 16)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -142,6 +143,8 @@ int print_short_hex(va_list args, char *buf, int index, identifierPtr ptr)
 		for (j = 0; j < precision; j++)
 			index = use_buffer(buf, index, '0'), k++;
 	}
+	else if (n == 0 && precision == 0 && ptr->period)
+		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
 		hex_recursion(n, y, (i - 1));
@@ -179,8 +182,7 @@ int print_short_hex_upper(va_list args, char *buf, int idx, identifierPtr ptr)
 		idx = use_buffer(buf, idx, '0'), k++;
 		idx = use_buffer(buf, idx, 'X'), k++;
 	}
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	for (p = n; p > 0; p /= 16)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -195,6 +197,8 @@ int print_short_hex_upper(va_list args, char *buf, int idx, identifierPtr ptr)
 		for (j = 0; j < precision; j++)
 			idx = use_buffer(buf, idx, '0'), k++;
 	}
+	else if (n == 0 && precision == 0 && ptr->period)
+		return (0);
 	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
 	if (n)
 		hex_upper_recursion(n, y, (i - 1));

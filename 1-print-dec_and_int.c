@@ -37,6 +37,8 @@ int print_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 			for (j = 0; j < precision; j++)
 				index = use_buffer(buf, index, '0'), k++;
 		}
+		else if (*d == 0 && precision == 0 && ptr->period)
+			return (0);
 		for (; d[i]; i++)
 			index = use_buffer(buf, index, d[i]);
 		if (left == 1)
@@ -72,8 +74,7 @@ int print_integer(va_list args, char *buf, int index, identifierPtr ptr)
 			index = use_buffer(buf, index, '+'), k++;
 		else if (_strchr(ptr->flags, ' ') && y[0] != '-')
 			index = use_buffer(buf, index, ' '), k++;
-		if (_strchr(ptr->flags, '-'))
-			left = 1;
+		left = _strchr(ptr->flags, '-') ? 1 : 0;
 		j = y[0] == '-' ? 1 : 0;
 		precision = ptr->precision - (_strlen(y) - j);
 		if (left == 0 && ptr->period == 0)
@@ -89,7 +90,8 @@ int print_integer(va_list args, char *buf, int index, identifierPtr ptr)
 			for (j = 0; j < precision; j++)
 				index = use_buffer(buf, index, '0'), k++;
 		}
-
+		else if (*y == 0 && precision == 0 && ptr->period)
+			return (0);
 		for (; y[d]; d++)
 			index = use_buffer(buf, index, y[d]);
 		if (left == 1)
