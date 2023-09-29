@@ -28,7 +28,7 @@ int print_long_uint(va_list args, char *buf, int index, identifierPtr ptr)
 		precision = ptr->precision - i;
 		if (left == 0 && ptr->period == 0)
 		{
-			l = ptr->width - (i + k);
+			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		}
@@ -43,7 +43,7 @@ int print_long_uint(va_list args, char *buf, int index, identifierPtr ptr)
 			index = use_buffer(buf, index, y[p]);
 		if (left == 1)
 		{
-			l = ptr->width - (i + k);
+			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		} free(y);
@@ -81,7 +81,7 @@ int print_long_octal(va_list args, char *buf, int index, identifierPtr ptr)
 		precision = ptr->precision - i;
 		if (left == 0 && ptr->period == 0)
 		{
-			l = ptr->width - (i + k);
+			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		}
@@ -96,7 +96,7 @@ int print_long_octal(va_list args, char *buf, int index, identifierPtr ptr)
 			index = use_buffer(buf, index, y[p]);
 		if (left == 1)
 		{
-			l = ptr->width - (i + k);
+			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		} free(y);
@@ -134,7 +134,7 @@ int print_short_uint(va_list args, char *buf, int index, identifierPtr ptr)
 		precision = ptr->precision - i;
 		if (left == 0 && ptr->period == 0)
 		{
-			l = ptr->width - (i + k);
+			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		}
@@ -149,7 +149,7 @@ int print_short_uint(va_list args, char *buf, int index, identifierPtr ptr)
 			index = use_buffer(buf, index, y[p]);
 		if (left == 1)
 		{
-			l = ptr->width - (i + k);
+			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		} free(y);
@@ -187,7 +187,7 @@ int print_short_octal(va_list args, char *buf, int index, identifierPtr ptr)
 		precision = ptr->precision - i;
 		if (left == 0 && ptr->period == 0)
 		{
-			l = ptr->width - (i + k);
+			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		}
@@ -202,7 +202,7 @@ int print_short_octal(va_list args, char *buf, int index, identifierPtr ptr)
 			index = use_buffer(buf, index, y[p]);
 		if (left == 1)
 		{
-			l = ptr->width - (i + k);
+			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
 			for (j = 0; j < l; j++)
 				index = use_buffer(buf, index, ' '), k++;
 		} free(y);
