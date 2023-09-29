@@ -11,45 +11,44 @@
 
 int print_long_uint(va_list args, char *buf, int index, identifierPtr ptr)
 {
-	int i = 0, j = 0, k = 0, l, left = 0, precision;
+	int i = 0, j = 0, k = 0, l, left = 0, precision, x;
 	unsigned long int n = va_arg(args, long int), p;
-	char x = '0', *y;
+	char *y;
 
-	if (n)
+	if (_strchr(ptr->flags, '+'))
+		index = use_buffer(buf, index, '+'), k++;
+	else if (_strchr(ptr->flags, ' '))
+		index = use_buffer(buf, index, ' '), k++;
+	if (_strchr(ptr->flags, '-'))
+		left = 1;
+	for (p = n; p > 0; p /= 10)
+		i++;
+	precision = ptr->precision - i, x = i == 0 ? 1 : 0;
+	if (left == 0 && ptr->period == 0)
 	{
-		if (_strchr(ptr->flags, '+'))
-			index = use_buffer(buf, index, '+'), k++;
-		else if (_strchr(ptr->flags, ' '))
+		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
+		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
-		if (_strchr(ptr->flags, '-'))
-			left = 1;
-		for (p = n; p > 0; p /= 10)
-			i++;
-		precision = ptr->precision - i;
-		if (left == 0 && ptr->period == 0)
-		{
-			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
-			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, ' '), k++;
-		}
-		else if (precision > 0)
-		{
-			for (j = 0; j < precision; j++)
-				index = use_buffer(buf, index, '0'), k++;
-		}
-		y = malloc(sizeof(char) * (i + 1)), y[i] = '\0';
+	}
+	else if (precision > 0)
+	{
+		for (j = 0; j < precision; j++)
+			index = use_buffer(buf, index, '0'), k++;
+	}
+	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
+	if (n)
 		uint_recursion(n, y, (i - 1));
-		for (p = 0; y[p]; p++)
-			index = use_buffer(buf, index, y[p]);
-		if (left == 1)
-		{
-			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
-			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, ' '), k++;
-		} free(y);
-		return (i + k);
-	} use_buffer(buf, index, x);
-	return (1);
+	else
+		y[0] = 48;
+	for (p = 0; y[p]; p++)
+		index = use_buffer(buf, index, y[p]);
+	if (left == 1)
+	{
+		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
+		for (j = 0; j < l; j++)
+			index = use_buffer(buf, index, ' '), k++;
+	} free(y);
+	return (i + x + k);
 }
 
 
@@ -64,45 +63,44 @@ int print_long_uint(va_list args, char *buf, int index, identifierPtr ptr)
 
 int print_long_octal(va_list args, char *buf, int index, identifierPtr ptr)
 {
-	int i = 0, j = 0, k = 0, l, left = 0, precision;
+	int i = 0, j = 0, k = 0, l, left = 0, precision, x;
 	unsigned long int n = va_arg(args, long int), p;
-	char x = '0', *y;
+	char *y;
 
-	if (n)
+	if (_strchr(ptr->flags, '+'))
+		index = use_buffer(buf, index, '+'), k++;
+	else if (_strchr(ptr->flags, ' '))
+		index = use_buffer(buf, index, ' '), k++;
+	if (_strchr(ptr->flags, '-'))
+		left = 1;
+	for (p = n; p > 0; p /= 8)
+		i++;
+	precision = ptr->precision - i, x = i == 0 ? 1 : 0;
+	if (left == 0 && ptr->period == 0)
 	{
-		if (_strchr(ptr->flags, '+'))
-			index = use_buffer(buf, index, '+'), k++;
-		else if (_strchr(ptr->flags, ' '))
+		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
+		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
-		if (_strchr(ptr->flags, '-'))
-			left = 1;
-		for (p = n; p > 0; p /= 8)
-			i++;
-		precision = ptr->precision - i;
-		if (left == 0 && ptr->period == 0)
-		{
-			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
-			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, ' '), k++;
-		}
-		else if (precision > 0)
-		{
-			for (j = 0; j < precision; j++)
-				index = use_buffer(buf, index, '0'), k++;
-		}
-		y = malloc(sizeof(char) * (i + 1)), y[i] = '\0';
+	}
+	else if (precision > 0)
+	{
+		for (j = 0; j < precision; j++)
+			index = use_buffer(buf, index, '0'), k++;
+	}
+	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
+	if (n)
 		octal_recursion(n, y, (i - 1));
-		for (p = 0; y[p]; p++)
-			index = use_buffer(buf, index, y[p]);
-		if (left == 1)
-		{
-			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
-			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, ' '), k++;
-		} free(y);
-		return (i + k);
-	} use_buffer(buf, index, x);
-	return (1);
+	else
+		y[0] = 48;
+	for (p = 0; y[p]; p++)
+		index = use_buffer(buf, index, y[p]);
+	if (left == 1)
+	{
+		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
+		for (j = 0; j < l; j++)
+			index = use_buffer(buf, index, ' '), k++;
+	} free(y);
+	return (i + x + k);
 }
 
 
@@ -117,45 +115,44 @@ int print_long_octal(va_list args, char *buf, int index, identifierPtr ptr)
 
 int print_short_uint(va_list args, char *buf, int index, identifierPtr ptr)
 {
-	int i = 0, j = 0, k = 0, l, left = 0, precision;
+	int i = 0, j = 0, k = 0, l, left = 0, precision, x;
 	unsigned short int n = va_arg(args, int), p;
-	char x = '0', *y;
+	char *y;
 
-	if (n)
+	if (_strchr(ptr->flags, '+'))
+		index = use_buffer(buf, index, '+'), k++;
+	else if (_strchr(ptr->flags, ' '))
+		index = use_buffer(buf, index, ' '), k++;
+	if (_strchr(ptr->flags, '-'))
+		left = 1;
+	for (p = n; p > 0; p /= 10)
+		i++;
+	precision = ptr->precision - i, x = i == 0 ? 1 : 0;
+	if (left == 0 && ptr->period == 0)
 	{
-		if (_strchr(ptr->flags, '+'))
-			index = use_buffer(buf, index, '+'), k++;
-		else if (_strchr(ptr->flags, ' '))
+		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
+		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
-		if (_strchr(ptr->flags, '-'))
-			left = 1;
-		for (p = n; p > 0; p /= 10)
-			i++;
-		precision = ptr->precision - i;
-		if (left == 0 && ptr->period == 0)
-		{
-			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
-			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, ' '), k++;
-		}
-		else if (precision > 0)
-		{
-			for (j = 0; j < precision; j++)
-				index = use_buffer(buf, index, '0'), k++;
-		}
-		y = malloc(sizeof(char) * (i + 1)), y[i] = '\0';
+	}
+	else if (precision > 0)
+	{
+		for (j = 0; j < precision; j++)
+			index = use_buffer(buf, index, '0'), k++;
+	}
+	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
+	if (n)
 		uint_recursion(n, y, (i - 1));
-		for (p = 0; y[p]; p++)
-			index = use_buffer(buf, index, y[p]);
-		if (left == 1)
-		{
-			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
-			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, ' '), k++;
-		} free(y);
-		return (i + k);
-	} use_buffer(buf, index, x);
-	return (1);
+	else
+		y[0] = 48;
+	for (p = 0; y[p]; p++)
+		index = use_buffer(buf, index, y[p]);
+	if (left == 1)
+	{
+		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
+		for (j = 0; j < l; j++)
+			index = use_buffer(buf, index, ' '), k++;
+	} free(y);
+	return (i + x + k);
 }
 
 
@@ -170,44 +167,44 @@ int print_short_uint(va_list args, char *buf, int index, identifierPtr ptr)
 
 int print_short_octal(va_list args, char *buf, int index, identifierPtr ptr)
 {
-	int i = 0, j = 0, k = 0, l, left = 0, precision;
+	int i = 0, j = 0, k = 0, l, left = 0, precision, x;
 	unsigned short int n = va_arg(args, int), p;
-	char x = '0', *y;
+	char *y;
 
-	if (n)
+
+	if (_strchr(ptr->flags, '+'))
+		index = use_buffer(buf, index, '+'), k++;
+	else if (_strchr(ptr->flags, ' '))
+		index = use_buffer(buf, index, ' '), k++;
+	if (_strchr(ptr->flags, '-'))
+		left = 1;
+	for (p = n; p > 0; p /= 8)
+		i++;
+	precision = ptr->precision - i, x = i == 0 ? 1 : 0;
+	if (left == 0 && ptr->period == 0)
 	{
-		if (_strchr(ptr->flags, '+'))
-			index = use_buffer(buf, index, '+'), k++;
-		else if (_strchr(ptr->flags, ' '))
+		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
+		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
-		if (_strchr(ptr->flags, '-'))
-			left = 1;
-		for (p = n; p > 0; p /= 8)
-			i++;
-		precision = ptr->precision - i;
-		if (left == 0 && ptr->period == 0)
-		{
-			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
-			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, ' '), k++;
-		}
-		else if (precision > 0)
-		{
-			for (j = 0; j < precision; j++)
-				index = use_buffer(buf, index, '0'), k++;
-		}
-		y = malloc(sizeof(char) * (i + 1)), y[i] = '\0';
+	}
+	else if (precision > 0)
+	{
+		for (j = 0; j < precision; j++)
+			index = use_buffer(buf, index, '0'), k++;
+	}
+	y = malloc(sizeof(char) * (i + 1)), y[i + x] = '\0';
+	if (n)
 		octal_recursion(n, y, (i - 1));
-		for (p = 0; y[p]; p++)
-			index = use_buffer(buf, index, y[p]);
-		if (left == 1)
-		{
-			l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
-			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, ' '), k++;
-		} free(y);
-		return (i + k);
-
-	} use_buffer(buf, index, x);
-	return (1);
+	else
+		y[0] = 48;
+	for (p = 0; y[p]; p++)
+		index = use_buffer(buf, index, y[p]);
+	if (left == 1)
+	{
+		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
+		for (j = 0; j < l; j++)
+			index = use_buffer(buf, index, ' '), k++;
+	} free(y);
+	return (i + x + k);
 }
+
