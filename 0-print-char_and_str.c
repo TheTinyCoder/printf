@@ -50,7 +50,7 @@ int print_str(va_list args, char *buf, int index, identifierPtr ptr)
 	{
 		min_width = ptr->width;
 		max_width = ptr->precision;
-		l = min_width - max_width;
+		l = ptr->period ? min_width - max_width : min_width - _strlen(s);
 		if (_strchr(ptr->flags, '-'))
 			left = 1;
 		if (left == 0)
