@@ -11,7 +11,8 @@
 
 int print_long_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 {
-	int h = va_arg(args, long int), i = 0, j = 0, k = 0, l, left = 0, precision;
+	long int h = va_arg(args, long int);
+	int i = 0, j = 0, k = 0, l, left = 0, precision;
 	char *d = int_to_str(h);
 
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
@@ -59,7 +60,8 @@ int print_long_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 
 int print_long_integer(va_list args, char *buf, int index, identifierPtr ptr)
 {
-	int d = 0, h = va_arg(args, long int), j = 0, k = 0, l, left = 0, precision;
+	long int d = 0, h = va_arg(args, long int);
+	int j = 0, k = 0, l, left = 0, precision;
 	char *y = int_to_str(h);
 
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
