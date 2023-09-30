@@ -16,7 +16,7 @@ int print_hex(va_list args, char *buf, int index, identifierPtr ptr)
 	char *y;
 
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
-	hash = _strchr(ptr->flags, '#') ? 2 : 0;
+	hash = _strchr(ptr->flags, '#') && n ? 2 : 0;
 	for (p = n; p > 0; p /= 16)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -90,7 +90,7 @@ int print_hex_upper(va_list args, char *buf, int index, identifierPtr ptr)
 	char *y;
 
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
-	hash = _strchr(ptr->flags, '#') ? 2 : 0;
+	hash = _strchr(ptr->flags, '#') && n ? 2 : 0;
 	for (p = n; p > 0; p /= 16)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;

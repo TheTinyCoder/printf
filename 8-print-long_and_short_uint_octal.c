@@ -69,7 +69,7 @@ int print_long_octal(va_list args, char *buf, int index, identifierPtr ptr)
 	char *y;
 
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
-	hash = _strchr(ptr->flags, '#') ? 1 : 0;
+	hash = _strchr(ptr->flags, '#') && n ? 1 : 0;
 	for (p = n; p > 0; p /= 8)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
@@ -169,25 +169,24 @@ int print_short_uint(va_list args, char *buf, int index, identifierPtr ptr)
 
 int print_short_octal(va_list args, char *buf, int index, identifierPtr ptr)
 {
-	int i = 0, j = 0, k = 0, l, left = 0, precision, x;
+	int hash, i = 0, j = 0, k = 0, l, left = 0, precision, x;
 	unsigned short int n = va_arg(args, int), p;
 	char *y;
 
 
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
+	hash = _strchr(ptr->flags, '#') && n ? 1 : 0;
 	for (p = n; p > 0; p /= 8)
 		i++;
 	x = i == 0 ? 1 : 0, precision = ptr->precision - i - x;
 	if (left == 0 && ptr->period == 0)
 	{
-		l = i == 0 ? ptr->width - 1 : ptr->width - (i + k);
+		l = i == 0 ? ptr->width - 1 : ptr->width - (i + hash);
 		for (j = 0; j < l; j++)
 			index = use_buffer(buf, index, ' '), k++;
 	}
-	if (_strchr(ptr->flags, '+'))
-		index = use_buffer(buf, index, '+'), k++;
-	else if (_strchr(ptr->flags, ' '))
-		index = use_buffer(buf, index, ' '), k++;
+	if (hash)
+		index = use_buffer(buf, index, '0'), k++;
 	if (precision > 0)
 	{
 		for (j = 0; j < precision; j++)
