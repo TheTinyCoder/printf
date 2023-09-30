@@ -96,3 +96,23 @@ int _strchr(char *s, char c)
 	}
 	return (0);
 }
+
+
+/**
+ * print_flags - prints flags depending on input
+ * @buf: pointer to buffer
+ * @index: buffer index
+ * @n: number of times to print
+ * @c: character to print
+ * Return: number of bytes printed
+ */
+
+int print_flags(char *buf, int index, int n, char c)
+{
+	int j = 0;
+
+	for (; j < n; j++)
+		index = use_buffer(buf, index, c);
+	return (j);
+}
+

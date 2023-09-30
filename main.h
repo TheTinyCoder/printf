@@ -131,5 +131,9 @@ int _strlen(char *s);
 /* locates character in a string */
 int _strchr(char *s, char c);
 
+/*prints flags depending on input */
+int print_flags(char *buf, int index, int n, char c);
+
+
 #endif
 
