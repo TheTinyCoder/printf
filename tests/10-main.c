@@ -95,8 +95,10 @@ int main(void)
 	_printf("In the middle %.*c of a sentence.\n", 6, 'H');
 	_printf("%.*s", 6, "Best School !\n");
 	_printf("%.*s", 6, "Hi!\n");
-	_printf("{%d}", _printf("%.0d", NULL));
+	_printf("{%d}", _printf("%.0d", 0));
 	printf("(%d)", printf("%.0d", 0));
+	_printf("{%d}", _printf("%.6s", "Best School !\n"));
+	printf("(%d)", printf("%.6s", "Best School !\n"));
 
 	fflush(stdout);
 	if (len != len2)
