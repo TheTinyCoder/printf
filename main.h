@@ -115,8 +115,11 @@ int print_short_hex(va_list, char *, int, identifierPtr);
 int print_short_hex_upper(va_list, char *, int, identifierPtr);
 int print_short_octal(va_list, char *, int, identifierPtr);
 
+/* print reversed string: 'r' */
+int print_str_reverse(va_list args, char *buf, int index, identifierPtr ptr);
 
-
+/* print rot13'ed string: 'R' */
+int print_str_rot13(va_list args, char *buf, int index, identifierPtr ptr);
 /***** UTIL FUNCTIONS ******/
 
 /* integer to string conversion */

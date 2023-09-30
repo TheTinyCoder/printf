@@ -20,7 +20,8 @@ specifier_funcs *get_specifier_func(const char *c)
 		{"lo", print_long_octal}, {"hd", print_short_decimal},
 		{"hi", print_short_integer}, {"hu", print_short_uint},
 		{"hx", print_short_hex}, {"hX", print_short_hex_upper},
-		{"ho", print_short_octal},
+		{"ho", print_short_octal}, {"r", print_str_reverse},
+		{"R", print_str_rot13},
 		{NULL, NULL}
 	};
 	specifierFuncPtr ptr;
