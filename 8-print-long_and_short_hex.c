@@ -27,7 +27,7 @@ int print_long_hex(va_list args, char *buf, int index, identifierPtr ptr)
 	if (hash)
 	{
 		index = use_buffer(buf, index, '0'), k++;
-		index = use_buffer(buf, index, 'X'), k++;
+		index = use_buffer(buf, index, 'x'), k++;
 	}
 	if (left == 0 && ptr->period == 0 && zero)
 		j = print_flags(buf, index, l, '0'), k += j, index += j;
@@ -121,7 +121,7 @@ int print_short_hex(va_list args, char *buf, int index, identifierPtr ptr)
 	if (hash)
 	{
 		index = use_buffer(buf, index, '0'), k++;
-		index = use_buffer(buf, index, 'X'), k++;
+		index = use_buffer(buf, index, 'x'), k++;
 	}
 	if (left == 0 && ptr->period == 0 && zero)
 		j = print_flags(buf, index, l, '0'), k += j, index += j;
