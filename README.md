@@ -19,7 +19,7 @@ A custom printf function
    - printf formatting is controlled by 'format identifiers' which have upto 6 parts as shown in the table below
    - They MUST be used in the order shown.
 
-      |%|Flags|Minimum field width|Period|Precision|Maximum field width|Argument type|
+      |%|Flags|Width (minimum field width)|Period|Precision (maximum field width)|Specifier (argument type)|
       |:--:|:----:|:-------------:|:------:|:-----:|:-----------------:|:-----------:|
       |Required|Optional|Optional|Optional(required for precision)|Optional|Required|
    - If `NULL` is passed to the function, returns **-1**
