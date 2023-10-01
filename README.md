@@ -81,7 +81,7 @@ A custom printf function
 
 ### Flags
 
-#### Plus, Space and Hash(number sign): +, blank, '-', '0' and #
+#### Plus, Blank, Left justify, Zero and Hash(number sign): +, blank, '-', '0' and '#'
 
    - Plus sign, `+`:
        - prints a plus sign preceding positive values
