@@ -20,7 +20,7 @@ A custom printf function
    - They MUST be used in the order shown.
 
       |%|Flags|Width (minimum field width)|Period|Precision (maximum field width)|Specifier (argument type)|
-      |:--:|:----:|:-------------:|:------:|:-----:|:-----------------:|:-----------:|
+      |:--:|:----:|:-------------:|:------:|:-----:|:-----------:|
       |Required|Optional|Optional|Optional(required for precision)|Optional|Required|
    - If `NULL` is passed to the function, returns **-1**
    - If string passed to the function is empty: (`_printf("");`) returns **0**
