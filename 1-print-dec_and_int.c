@@ -38,7 +38,7 @@ int print_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 		index = use_buffer(buf, index, d[i]);
 	if (left == 1)
 	{
-		l = ptr->period ? ptr->width - (i + k) : 0;
+		l = ptr->period ? ptr->width - (i + k) : l;
 		j = print_flags(buf, index, l, ' '), k += j;
 	}
 	free(d);
