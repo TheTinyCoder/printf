@@ -14,20 +14,13 @@ int print_char(va_list args, char *buf, int index, identifierPtr ptr)
 	int j = 0, k = 0, left = 0, width;
 	char c = va_arg(args, int);
 
+	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	width = ptr->width - 1;
-	if (_strchr(ptr->flags, '-'))
-		left = 1;
 	if (left == 0)
-	{
-		for (j = 0; j < width; j++)
-			index = use_buffer(buf, index, ' '), k++;
-	}
+		j = print_flags(buf, index, width, ' '), k += j;
 	index = use_buffer(buf, index, c), k++;
 	if (left == 1)
-	{
-		for (j = 0; j < width; j++)
-			index = use_buffer(buf, index, ' '), k++;
-	}
+		j = print_flags(buf, index, width, ' '), k += j;
 	return (k);
 }
 
@@ -48,17 +41,12 @@ int print_str(va_list args, char *buf, int index, identifierPtr ptr)
 
 	if (s)
 	{
+		left = _strchr(ptr->flags, '-') ? 1 : 0;
 		min_width = ptr->width;
 		max_width = ptr->precision;
 		l = ptr->period ? min_width - max_width : min_width - _strlen(s);
-		if (_strchr(ptr->flags, '-'))
-			left = 1;
 		if (left == 0)
-		{
-			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, ' '), k++;
-		}
-
+			j = print_flags(buf, index, l, ' '), k += j;
 		for (; s[i]; i++)
 		{
 			if (ptr->period && i == max_width)
@@ -66,14 +54,10 @@ int print_str(va_list args, char *buf, int index, identifierPtr ptr)
 			index = use_buffer(buf, index, s[i]);
 		}
 		if (left == 1)
-		{
-			for (j = 0; j < l; j++)
-				index = use_buffer(buf, index, ' '), k++;
-		}
+			j = print_flags(buf, index, l, ' '), k += j;
 		return (i + k);
 	}
 	for (; x[i]; i++)
 		index = use_buffer(buf, index, x[i]);
 	return (6);
 }
-
