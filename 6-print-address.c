@@ -11,15 +11,17 @@
 
 int print_address(va_list args, char *buf, int index, identifierPtr ptr)
 {
-	int i = 0;
+	int i = 0, m, n = 0, width;
 	unsigned long int j = (uintptr_t)(va_arg(args, void *)), k;
 	char *x = "(nil)", *y;
 
-	(void)ptr;
 	if (j)
 	{
 		for (k = j; k > 0; k /= 16)
 			i++;
+		width = ptr->width - (i + 2);
+		m = print_flags(buf, index, width, ' ');
+		n += m, index += m;
 		y = malloc(sizeof(char) * (i + 1 + 2));
 		y[i + 2] = '\0';
 		y[0] = 48, y[1] = 120;
@@ -27,7 +29,7 @@ int print_address(va_list args, char *buf, int index, identifierPtr ptr)
 		for (k = 0; y[k]; k++)
 			index = use_buffer(buf, index, y[k]);
 		free(y);
-		return (i + 2);
+		return (i + n + 2);
 	}
 	for (; x[i]; i++)
 		index = use_buffer(buf, index, x[i]);
