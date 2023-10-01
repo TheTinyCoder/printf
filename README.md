@@ -16,7 +16,12 @@ A custom printf function
     `$ ./printf`
 
 ## Modus Operandi
+   - printf formatting is controlled by 'format identifiers' which have upto 6 parts as shown in the table below
+   - They MUST be used in the order shown.
 
+      |%|Flags|Minimum field width|Period|Precision|Maximum field width|Argument type|
+      |:--:|:----:|:-------------:|:------:|:-----:|:-----------------:|:-----------:|
+      |Required|Optional|Optional|Optional(required for precision)|Optional|Required|
    - If `NULL` is passed to the function, returns **-1**
    - If string passed to the function is empty: (`_printf("");`) returns **0**
    - Else, returns the number of bytes printed
@@ -62,9 +67,21 @@ A custom printf function
        - casts pointer value to `uintptr_t`, then saves it in `unsigned long int`
        - then converts to hexadecimal and prints with prefix `0x`
 
+#### Custom String: %r
+
+   - Works like `%s` except:
+       - string argument is printed in reverse  
+   - Example: `_printf("%r\n", "Best School");` prints `loohcS tseB`
+
+#### Custom String: %R
+
+   - Works like `%s` except:
+       - string argument is encrypted in ROT13  
+   - Example: `_printf("%R\n", "Best");` prints `Orfg`
+
 ### Flags
 
-#### Plus, Space and Hash(number sign): + , \s and #
+#### Plus, Space and Hash(number sign): +, blank, '-', '0' and #
 
    - Plus sign, `+`:
        - prints a plus sign preceding positive values
@@ -72,7 +89,7 @@ A custom printf function
        - prints a minus sign preceding negative values
        - example: `_printf("%+d", -1024)` prints `-1024`
 
-   - Space, `' '`:
+   - Blank, `' '`:
        - prints a space before a positive value not printed with the `+` flag
        - example: `_printf("% d", 1024)` prints ` 1024`
        - if space is combined with '+' flag, then it just prints plus sign preceding positive values
@@ -84,6 +101,16 @@ A custom printf function
        - prints prefix `0x` to the output value when used with the **hexadecimal** conversion character `x`
        - example: `_printf("%#x", 1024)` prints `0x400`
 
+   - Zero, `0`:
+       - for `d`, `i`, `o`, `u`, `x` and `X` conversions, leading `0`s (after indication of sign or base) are used to pad to the field width
+       - no space padding is performed
+       - if the `0` and `-` flags both appear, the 0 flag is ignored
+       - if **precision** is specified, the `0` flag is ignored
+
+   - Left justify, `-`:
+       - the result of the conversion is left-justified within the field (width is padded with blanks on the right)
+       - the conversion is right-justified if this flag is not specified
+
 ### Modifiers
 
 #### Length modifiers: l & h
@@ -93,7 +120,22 @@ A custom printf function
    - Long uses `LONG_MIN` to `LONG_MAX` for `d` and `i` and `ULONG_MIN` to `ULONG_MAX` for `u`, `o`, `x` & `X`
    - Short uses `SHRT_MIN` to `SHRT_MAX` for `d` and `i` and `USHRT_MIN` to `USHRT_MAX` for `u`, `o`, `x` & `X`
 
-#### Width modifiers:
+#### Width modifier:
+   -  minimum field width can be specified as a decimal digit string following any flag specifier:
+       -  in which case the field width is set to the specified number of columns
+   -  the field width can also be specified as asterisk (*):
+       -  in which case an additional argument of type int is accessed to determine the field width.
+   -  example: to print an integer x, in a field width 6, you would write the statement `_printf("%*d", 6, x);`
+
+#### Precision modifier:
+   -  if you wish to specify the precision of an argument, it MUST be prefixed with the period 
+   -  precision for the conversion can be specified as a decimal digit string or by an asterisk (*)
+   -  once again, they must follow or come after a period
+   -  if an asterisk is used to specify the precision:
+       -  an additional argument of type int prior to the conversion/specifier argument is accessed to determine the precision
+   -  if both width and precision are specified as asterisks:
+       -  the order of arguments to printf() for the conversion should appear in the following order: *width*, *precision*, *value*
+
 ## More Information
 
    - Uses a local buffer of 1024 chars and calls write only when buffer is filled
