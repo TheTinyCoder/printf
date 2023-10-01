@@ -17,7 +17,7 @@ int print_char(va_list args, char *buf, int index, identifierPtr ptr)
 	left = _strchr(ptr->flags, '-') ? 1 : 0;
 	width = ptr->width - 1;
 	if (left == 0)
-		j = print_flags(buf, index, width, ' '), k += j;
+		j = print_flags(buf, index, width, ' '), k += j, index += j;
 	index = use_buffer(buf, index, c), k++;
 	if (left == 1)
 		j = print_flags(buf, index, width, ' '), k += j;
@@ -46,7 +46,7 @@ int print_str(va_list args, char *buf, int index, identifierPtr ptr)
 		max_width = ptr->precision;
 		l = ptr->period ? min_width - max_width : min_width - _strlen(s);
 		if (left == 0)
-			j = print_flags(buf, index, l, ' '), k += j;
+			j = print_flags(buf, index, l, ' '), k += j, index += j;
 		for (; s[i]; i++)
 		{
 			if (ptr->period && i == max_width)
