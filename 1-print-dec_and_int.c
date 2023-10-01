@@ -37,10 +37,7 @@ int print_decimal(va_list args, char *buf, int index, identifierPtr ptr)
 	for (; d[i]; i++)
 		index = use_buffer(buf, index, d[i]);
 	if (left == 1)
-	{
-		l = ptr->period ? ptr->width - (i + k) : l;
 		j = print_flags(buf, index, l, ' '), k += j;
-	}
 	free(d);
 	return (i + k);
 }
@@ -83,10 +80,7 @@ int print_integer(va_list args, char *buf, int index, identifierPtr ptr)
 	for (; y[d]; d++)
 		index = use_buffer(buf, index, y[d]);
 	if (left == 1)
-	{
-		l = ptr->period ? ptr->width - (d + k) : l;
 		j = print_flags(buf, index, l, ' '), k += j;
-	}
 	free(y);
 	return (d + k);
 }

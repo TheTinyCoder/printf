@@ -51,7 +51,16 @@ int main(void)
 		fflush(stdout);
 		return (1);
 	}
-	
+	len = _printf("%-6p\n", (void *)0x7faf51f0f608);
+	len2 = printf("%-6p\n", (void *)0x7faf51f0f608);
+	fflush(stdout);
+	if (len != len2)
+	{
+		printf("Lengths differ.\n");
+		fflush(stdout);
+		return (1);
+	}
+
 	len = _printf("%.6s", "Best School !\n");
 	len2 = printf("%.6s", "Best School !\n");
 	fflush(stdout);
